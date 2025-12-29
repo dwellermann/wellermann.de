@@ -90,19 +90,33 @@ Ich werde berichten. Bis dahin:
 
 ## System-Setup: Was ich konfiguriert habe
 
-Nach der Installation habe ich mein System nach meinen Bedürfnissen eingerichtet. Hier ein Überblick:
+Nach der Installation habe ich mein System nach meinen Bedürfnissen eingerichtet. 
 
-### Basis-System optimieren
+###   **Hier ein Überblick:**
 
-Zuerst das System aktualisieren und DNF für schnellere Downloads optimieren:
+### DNF-Konfiguration anpassen
+
+Zuerst habe ich die DNF-Konfiguration optimiert, um schnellere Downloads und bessere Paketverwaltung zu gewährleisten:
 
 ```bash
-sudo dnf update --refresh
-sudo dnf upgrade
-
-# DNF-Konfiguration anpassen
 sudo nano /etc/dnf/dnf.conf
-# fastestmirror=True, max_parallel_downloads=10
+```
+
+```ini
+[main]
+gpgcheck=True
+installonly_limit=3
+clean_requirements_on_remove=True
+best=False
+skip_if_unavailable=False
+max_parallel_downloads=10
+fastestmirror=True
+```
+
+Anschließend ein Update durchgeführt:
+
+```bash
+sudo dnf upgrade --refresh
 ```
 
 ### Shell-Umgebung: zsh + Oh My Zsh
@@ -125,6 +139,13 @@ sudo dnf install gnome-tweaks
 sudo dnf install gnome-extensions-app
 sudo dnf install gnome-shell-extension-appindicator
 sudo dnf install gnome-shell-extension-gsconnect
+```
+
+**Nautilus-Erweiterungen:**
+
+```bash
+
+sudo dnf install nautilus-extension 
 ```
 
 ### Entwicklungsumgebung
