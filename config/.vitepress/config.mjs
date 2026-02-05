@@ -23,22 +23,48 @@ export default defineConfig({
 
   ],
   transformHead: (ctx) => {
-    console.log('Frontmatter:', ctx.description, ctx.title)
     // Add custom meta tags based on page frontmatter
     const tags = []
 
-    // Only add description tags if description exists
-    if (ctx.description) {
-      tags.push(['meta', { name: 'description', content: ctx.description }])
-      tags.push(['meta', { property: 'og:description', content: ctx.description }])
-      tags.push(['meta', { name: 'twitter:description', content: ctx.description }])
+    const frontmatter = ctx.pageData.frontmatter
+
+    // Description
+    if (frontmatter.description) {
+      tags.push(['meta', { name: 'description', content: frontmatter.description }])
+      tags.push(['meta', { property: 'og:description', content: frontmatter.description }])
+      tags.push(['meta', { name: 'twitter:description', content: frontmatter.description }])
     }
 
-    // Only add title tags if title exists
-    if (ctx.title) {
-      const title = ctx.title
+    // Title
+    if (frontmatter.title) {
+      const title = frontmatter.title
       tags.push(['meta', { property: 'og:title', content: title }])
       tags.push(['meta', { name: 'twitter:title', content: title }])
+    }
+
+    // Keywords (from tags)
+    if (frontmatter.tags && Array.isArray(frontmatter.tags)) {
+      tags.push(['meta', { name: 'keywords', content: frontmatter.tags.join(', ') }])
+    }
+
+    // Author
+    const author = frontmatter.author || "Daniel Wellermann"
+    tags.push(['meta', { name: 'author', content: author }])
+    tags.push(['meta', { name: 'twitter:creator', content: '@D_Wellermann' }]) // Static for now, could be dynamic
+
+    // Image
+    if (frontmatter.image) {
+        // Handle both object (src/alt) and string formats if necessary, standard VP is usually local path
+        // For OG tags we generally want a full URL if possible, or a path.
+        // Assuming frontmatter.image might be a simple string path in some contexts or object in others.
+        // VitePress default theme often uses image: { src: '', alt: '' } for hero but simple strings for custom fields.
+        // let's assume we might add an explicit 'cover' field or use 'image'.
+        // For safely, let's look for a specific 'cover' or 'image' field that is a string URL.
+        const imageUrl = frontmatter.cover || (typeof frontmatter.image === 'string' ? frontmatter.image : null)
+        if (imageUrl) {
+            tags.push(['meta', { property: 'og:image', content: imageUrl }])
+            tags.push(['meta', { name: 'twitter:image', content: imageUrl }])
+        }
     }
 
     return tags

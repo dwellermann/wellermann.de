@@ -2,6 +2,8 @@
 title: Mein Wechsel zu Fedora
 description: Blog über den Wechsel zu Fedora - Die Suche nach der goldenen Mitte zwischen Arch und Ubuntu
 date: 2024-11-15
+author: Daniel Wellermann
+layout: doc
 category: Linux
 tags: 
   - Linux
@@ -9,7 +11,10 @@ tags:
   - Ubuntu
   - Arch
   - Desktop
-layout: doc
+head:
+  - - meta
+    - name: keywords
+      content: "Linux, Fedora, Ubuntu, Arch, Desktop"
 footer: true
 lastupdated: true
 ---

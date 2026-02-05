@@ -1,7 +1,18 @@
 ---
 title: NUC im Servergehäuse
 description: "Dokumentation des Umbaus eines Intel NUC in ein kompaktes Servergehäuse. Ziel: Integration in eine bestehende Infrastruktur und eine saubere Bauform."
+date: 2023-11-15 # Estimated date, added for consistency
+author: Daniel Wellermann
 layout: doc
+tags:
+  - Hardware
+  - Server
+  - DIY
+  - Homelab
+head:
+  - - meta
+    - name: keywords
+      content: "Hardware, Server, DIY, Homelab, Intel NUC"
 footer: true
 lastupdated: true
 ---

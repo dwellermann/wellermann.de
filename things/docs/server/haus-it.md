@@ -1,12 +1,18 @@
 ---
 title: Haus IT
 description: Ein direkter Einblick in meine private IT-Infrastruktur – Hardware, Software und Architektur. Effizient und unter meiner Kontrolle.
+date: 2023-10-01 # Estimated date
+author: Daniel Wellermann
+layout: doc
 tags:
   - Homelab
   - Proxmox
   - Netzwerk
   - Infrastructure
-layout: doc
+head:
+  - - meta
+    - name: keywords
+      content: "Homelab, Proxmox, Netzwerk, Infrastructure"
 footer: true
 lastupdated: true
 ---
