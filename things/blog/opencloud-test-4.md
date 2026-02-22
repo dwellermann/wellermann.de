@@ -2,6 +2,7 @@
 title: "OpenCloud Test #4"
 description: "Mein OpenCloud Test nummer 4 oder Q4 Test - Deployment und Migration von Nextcloud"
 date: 2024-10-05
+author: Daniel Wellermann
 category: Cloud
 tags:
   - OpenCloud
@@ -115,3 +116,10 @@ Die Version 3.* des Clients befindet sich derzeit noch in der Beta-Phase und wur
 Hier ein Screenshot der Desktop-Anwendung:
 
 ![OpenCloud Client Screenshot](/images/OpenCloud-Test41-2.png)
+
+---
+
+## Weiterführende Links
+
+- [LXC Setup — Container-Einrichtung auf Proxmox](/docs/server/lxc-setup)
+- [Haus IT — Die zugrundeliegende Infrastruktur](/docs/server/haus-it)

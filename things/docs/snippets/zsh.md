@@ -1,6 +1,8 @@
 ---
 title: Wechsel zu zsh
 description: "Wechsel von bash zu zsh"
+date: 2024-01-01
+author: Daniel Wellermann
 tags:
   - zsh
   - Shell

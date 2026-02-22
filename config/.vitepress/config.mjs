@@ -53,24 +53,74 @@ export default defineConfig({
     tags.push(['meta', { name: 'twitter:creator', content: '@D_Wellermann' }]) // Static for now, could be dynamic
 
     // Image
-    if (frontmatter.image) {
-        // Handle both object (src/alt) and string formats if necessary, standard VP is usually local path
-        // For OG tags we generally want a full URL if possible, or a path.
-        // Assuming frontmatter.image might be a simple string path in some contexts or object in others.
-        // VitePress default theme often uses image: { src: '', alt: '' } for hero but simple strings for custom fields.
-        // let's assume we might add an explicit 'cover' field or use 'image'.
-        // For safely, let's look for a specific 'cover' or 'image' field that is a string URL.
-        const imageUrl = frontmatter.cover || (typeof frontmatter.image === 'string' ? frontmatter.image : null)
-        if (imageUrl) {
-            tags.push(['meta', { property: 'og:image', content: imageUrl }])
-            tags.push(['meta', { name: 'twitter:image', content: imageUrl }])
+    if (frontmatter.image || frontmatter.cover) {
+      const imageUrl = frontmatter.cover || (typeof frontmatter.image === 'string' ? frontmatter.image : null)
+      if (imageUrl) {
+        tags.push(['meta', { property: 'og:image', content: imageUrl }])
+        tags.push(['meta', { name: 'twitter:image', content: imageUrl }])
+      }
+    }
+
+    // Canonical URL + og:url
+    const siteUrl = 'https://wellermann.de'
+    const pageUrl = `${siteUrl}/${ctx.pageData.relativePath
+      .replace(/\.md$/, '')
+      .replace(/\/index$/, '')
+      .replace(/^index$/, '')}`
+    tags.push(['link', { rel: 'canonical', href: pageUrl }])
+    tags.push(['meta', { property: 'og:url', content: pageUrl }])
+
+    // Schema.org JSON-LD
+    if (frontmatter.title) {
+      const relativePath = ctx.pageData.relativePath
+      const isBlog = relativePath.startsWith('blog/')
+      const isDocs = relativePath.startsWith('docs/')
+      const isProject = relativePath.startsWith('projects/')
+
+      if (isBlog || isDocs || isProject) {
+        const schemaType = isBlog ? 'BlogPosting' : 'TechArticle'
+        const datePublished = frontmatter.date
+          ? new Date(frontmatter.date).toISOString()
+          : undefined
+        const dateModified = ctx.pageData.lastUpdated
+          ? new Date(ctx.pageData.lastUpdated).toISOString()
+          : datePublished
+
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': schemaType,
+          headline: frontmatter.title,
+          description: frontmatter.description || '',
+          author: {
+            '@type': 'Person',
+            name: frontmatter.author || 'Daniel Wellermann',
+            url: siteUrl
+          },
+          url: pageUrl,
+          ...(datePublished && { datePublished }),
+          ...(dateModified && { dateModified }),
+          keywords: frontmatter.tags ? frontmatter.tags.join(', ') : ''
         }
+        tags.push(['script', { type: 'application/ld+json' }, JSON.stringify(schema)])
+      }
     }
 
     return tags
   },
   sitemap: {
     hostname: 'https://wellermann.de',
+    transformItems: (items) => {
+      return items.map(item => {
+        const url = item.url
+        const isBlog = url.includes('/blog/')
+        const isHome = url === '/' || url === ''
+        return {
+          ...item,
+          changefreq: isHome || isBlog ? 'weekly' : 'monthly',
+          priority: isHome ? 1.0 : isBlog ? 0.8 : 0.6,
+        }
+      })
+    }
   },
   themeConfig: {
     footer: {

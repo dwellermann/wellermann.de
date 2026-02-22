@@ -1,6 +1,8 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+title: Daniel Wellermann — Blog, Docs & Projekte
+description: Persönliche Website von Daniel Wellermann. Blog über Linux, IT und Technologie. Docs zu Server-Setup, LXC, Proxmox, Development und Tools.
 
 hero:
   name: "Daniel Wellermann"

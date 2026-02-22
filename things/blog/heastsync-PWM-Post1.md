@@ -1,6 +1,7 @@
 ---
 title: "HeatSync PWM Translator — Statusbericht Phase 2"
 date: 2025-12-20
+author: Daniel Wellermann
 description: "Projektdokumentation: Stabiler 500Hz PWM-Ausgang, Tester-Sketch und nächste Schritte."
 tags:
   - Heizung

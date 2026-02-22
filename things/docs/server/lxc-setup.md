@@ -1,6 +1,8 @@
 ---
 title: LXC Setup
 description: Anleitung zur Einrichtung eines LXC Containers in Proxmox
+date: 2024-01-01
+author: Daniel Wellermann
 tags:
   - LXC
   - Proxmox
@@ -103,3 +105,11 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades
 3. Wechsel zu Terminal von PC
   - `ssh-copy-id username@ip`
 ```
+
+---
+
+## Weiterführende Links
+
+- [Haus IT — Überblick über meine gesamte Heiminfrastruktur](/docs/server/haus-it)
+- [Syncthing & Photoprism Setup](/docs/server/syncthing-photoprism)
+- [OpenCloud Test #4 — LXC-basiertes Cloud-Deployment](/blog/opencloud-test-4)

@@ -1,6 +1,8 @@
 ---
 title: Universal WebApp deploy Script
 description: Ein universelles Bash-Skript für moderne Web-Apps mit lftp
+date: 2024-01-01
+author: Daniel Wellermann
 tags:
   - Deployment
   - Bash

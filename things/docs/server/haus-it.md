@@ -100,3 +100,11 @@ Dieser Aufbau erfüllt zwei Zwecke:
 2.  **Ressourcen-Sharing:** Bestimmte Dienste oder Anfragen können über die feste IP des Root-Servers geleitet werden.
 
 Das System ist eine kontinuierliche Weiterentwicklung. Es ist so konzipiert, dass es funktioniert, ohne ständig Aufmerksamkeit zu erfordern.
+
+---
+
+## Weiterführende Links
+
+- [LXC Setup — Container-Einrichtung auf Proxmox](/docs/server/lxc-setup)
+- [Syncthing & Photoprism Setup](/docs/server/syncthing-photoprism)
+- [NUC im Servergehäuse — Hardware des Homelabs](/projects/NUC_Server)
