@@ -63,10 +63,11 @@ export default defineConfig({
 
     // Canonical URL + og:url
     const siteUrl = 'https://wellermann.de'
-    const pageUrl = `${siteUrl}/${ctx.pageData.relativePath
+    const rawPath = ctx.pageData.relativePath
       .replace(/\.md$/, '')
       .replace(/\/index$/, '')
-      .replace(/^index$/, '')}`
+      .replace(/^index$/, '')
+    const pageUrl = rawPath ? `${siteUrl}/${rawPath}` : siteUrl
     tags.push(['link', { rel: 'canonical', href: pageUrl }])
     tags.push(['meta', { property: 'og:url', content: pageUrl }])
 
@@ -74,35 +75,38 @@ export default defineConfig({
     if (frontmatter.title) {
       const relativePath = ctx.pageData.relativePath
       const isBlog = relativePath.startsWith('blog/')
-      const isDocs = relativePath.startsWith('docs/')
-      const isProject = relativePath.startsWith('projects/')
+      const schemaType = isBlog ? 'BlogPosting' : 'TechArticle'
+      const datePublished = frontmatter.date
+        ? new Date(frontmatter.date).toISOString()
+        : undefined
+      const dateModified = ctx.pageData.lastUpdated
+        ? new Date(ctx.pageData.lastUpdated).toISOString()
+        : datePublished
 
-      if (isBlog || isDocs || isProject) {
-        const schemaType = isBlog ? 'BlogPosting' : 'TechArticle'
-        const datePublished = frontmatter.date
-          ? new Date(frontmatter.date).toISOString()
-          : undefined
-        const dateModified = ctx.pageData.lastUpdated
-          ? new Date(ctx.pageData.lastUpdated).toISOString()
-          : datePublished
-
-        const schema = {
-          '@context': 'https://schema.org',
-          '@type': schemaType,
-          headline: frontmatter.title,
-          description: frontmatter.description || '',
-          author: {
-            '@type': 'Person',
-            name: frontmatter.author || 'Daniel Wellermann',
-            url: siteUrl
-          },
-          url: pageUrl,
-          ...(datePublished && { datePublished }),
-          ...(dateModified && { dateModified }),
-          keywords: frontmatter.tags ? frontmatter.tags.join(', ') : ''
-        }
-        tags.push(['script', { type: 'application/ld+json' }, JSON.stringify(schema)])
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': schemaType,
+        headline: frontmatter.title,
+        description: frontmatter.description || '',
+        author: {
+          '@type': 'Person',
+          name: author,
+          url: siteUrl
+        },
+        publisher: {
+          '@type': 'Person',
+          name: 'Daniel Wellermann',
+          url: siteUrl
+        },
+        url: pageUrl,
+        datePublished: datePublished,
+        dateModified: dateModified,
+        keywords: frontmatter.tags ? frontmatter.tags.join(', ') : '',
+        inLanguage: 'de-DE'
       }
+      // Felder ohne Wert entfernen
+      Object.keys(schema).forEach(k => schema[k] === undefined && delete schema[k])
+      tags.push(['script', { type: 'application/ld+json' }, JSON.stringify(schema)])
     }
 
     return tags
