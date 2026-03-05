@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Features from "../components/widgets/Features.astro";
+import Content from "../components/widgets/Content.astro";
+import Form from "../components/ui/Form.astro";
+import { link } from "node:fs";
+import { siteConfig } from "../config/site";
+
+const metadata = {
+  title: "Kontakt",
+  description: "Nehmen Sie Kontakt mit uns auf, um Ihr nächstes Projekt zu besprechen.",
+};
+
+const visionText = ["Nehmen Sie Kontakt mit uns auf, um Ihr nächstes Projekt zu besprechen."];
+---
+
+<BaseLayout {metadata}>
+
+  <Content tagline="Kontakt" title="Kontakt" description={visionText} />
+ {/*<div
+    class="reveal mx-auto max-w-xl bg-card border border-border rounded-3xl p-8 shadow-sm mb-12 md:mb-16"
+  >
+     <Form />
+
+  </div>*/}
+  <Features
+    tagline=""
+    title=""
+    subtitle=""
+    classes={{ container: "pt-0 md:pt-0" }}
+    features={[
+      ...siteConfig.socialLinks.filter((social) => ![""].includes(social.name)).map((social) => (
+            {
+        title: social.name,
+        description: social.describe,
+        icon: `${social.icon}`,
+        iconClass: "bg-blue-500/10 text-blue-400",
+        link: social.href,
+      }
+      ))
+    ]}
+  />
+</BaseLayout>
