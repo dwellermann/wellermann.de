@@ -1,6 +1,4 @@
-import { link } from "node:fs";
 import ogImage from "../assets/og-image.png";
-import { describe } from "node:test";
 
 export const siteConfig = {
   name: "Daniel Wellermann",

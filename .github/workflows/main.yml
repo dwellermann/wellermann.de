@@ -1,4 +1,4 @@
-name: Deploy VitePress to Webspace
+name: Deploy Astro to Webspace
 
 on:
   push:
@@ -15,8 +15,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0 # Needed for VitePress lastUpdated feature
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -27,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Build VitePress site
+    - name: Build Astro site
       run: npm run build
 
     - name: Deploy to webspace via SFTP
@@ -37,6 +35,6 @@ jobs:
         username: ${{ secrets.SFTP_USERNAME }}
         password: ${{ secrets.SFTP_PASSWORD }}
         port: ${{ secrets.SFTP_PORT }}
-        local_path: './config/.vitepress/dist/*'
+        local_path: './dist/*'
         remote_path: ${{ secrets.SFTP_REMOTE_PATH }}
         sftp_only: true
