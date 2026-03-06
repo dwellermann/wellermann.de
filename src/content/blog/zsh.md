@@ -9,7 +9,9 @@ tags: ["zsh", "Shell", "Terminal", "Oh My Zsh"]
 
 # Wechsel zu zsh
 
-Ich habe mich endlich dazu durchgerungen, auf meinem Desktop-System zsh mit "Oh My Zsh" zu verwenden – nach fast 25 Jahren mit bash. Hier ist meine kleine Notiz dazu.
+**Kurzfassung:** Nach fast 25 Jahren bash bin ich auf zsh mit Oh My Zsh gewechselt. Schnelle Ordnernavigation und Autovervollständigung waren der Hauptgrund – der Wechsel lohnt sich.
+
+Ich hab mich endlich dazu durchgerungen, auf meinem Desktop-System zsh mit „Oh My Zsh" zu verwenden. Hier sind die Schritte.
 
 ## Installation
 
@@ -41,7 +43,7 @@ Wähle ein Theme aus und setze es in der Datei `~/.zshrc`:
 ZSH_THEME="dein_gewähltes_theme"
 ```
 
-Meine Favorioten Themes:
+Meine Favoriten-Themes:
 
 1. `amuse`
 2. `bira`
@@ -66,6 +68,4 @@ Empfohlene Plugins:
 
 ## Fazit
 
-Mit zsh und "Oh My Zsh" kannst du deine Shell-Erfahrung erheblich verbessern. Wähle ein Theme und aktiviere Plugins, um deine Arbeitsumgebung anzupassen.
-
-Einer der Hauptgründe für den Wechsel ist das schnelle Navigieren durch Ordner und die Autovervollständigung, die zsh bietet.
+Schnelle Ordnernavigation und Autovervollständigung – das sind die zwei Hauptgründe für den Wechsel. Lohnt sich.
