@@ -7,16 +7,17 @@ category: "Linux"
 tags: ["Linux", "Fedora", "Ubuntu", "Arch", "Desktop"]
 ---
 
-# Mein Wechsel zu Fedora:
+# Mein Wechsel zu Fedora
 
-## Kurzfassung
+**Kurzfassung:** Nach einem Jahr Ubuntu auf dem Desktop bin ich zu Fedora 43 gewechselt. Vanilla GNOME, Flatpak statt Snap, aktuelle Technologien mit QA – passt besser zu meinem Workflow.
 
-Ich nutze Linux seit 2005. Nach vielen Jahren mit Arch (XFCE u. Gnome) wollte ich was neues auf dem Desktop vorallem mit Gnome als DE. Ein Jahr mit Ubuntu zeigte mir, dass dessen Entscheidungen (Snap, starke Patches) nicht zu meinem Workflow passen.
+## Ausgangslage
 
-Ich respektiere Ubuntu, damit bin ich in die Linux‑Welt gestartet und es hat mich die ersten Jahre begleitet. Allerdings zwangen mich Ubuntu-Versionen 25.04 und 25.10 zweimal, den Kernel zurückzurollen. Das war mir in den letzten Jahren unter Arch nicht passiert.
+Ich nutze Linux seit 2005. Nach vielen Jahren mit Arch (XFCE und GNOME) wollte ich etwas Neues auf dem Desktop, vor allem mit GNOME als DE. Ein Jahr mit Ubuntu zeigte mir, dass dessen Entscheidungen (Snap, starke Patches) nicht zu meinem Workflow passen.
 
-Ich hätte bei Arch bleiben könnnen und fast wäre ich von Ubuntu wieder zurückgekehrt.
-Doch Fedora hatte ich noch nie wirklich ausprobiert. Kurzerhand entschied ich mich für Fedora 43.
+Ich respektiere Ubuntu – damit bin ich in die Linux‑Welt gestartet und es hat mich die ersten Jahre begleitet. Allerdings zwangen mich Ubuntu-Versionen 25.04 und 25.10 zweimal, den Kernel zurückzurollen. Das war mir in den letzten Jahren unter Arch nicht passiert.
+
+Fedora hatte ich noch nie wirklich ausprobiert. Kurzerhand entschied ich mich für Fedora 43.
 
 ## Warum Fedora
 
@@ -35,20 +36,16 @@ distrobox enter server-env
 
 ## Fazit
 
-Fedora ist derzeit mein Daily Driver. Es liefert moderne Software und fühlt sich schnell und stabil an.
-Gnome läuft viel runder als unter Ubuntu. Ich bin gespannt wie lange ich Fedora nutzen werde und ob ich doch am Ende wieder zu Arch zurückkehre.
+Fedora ist mein aktueller Daily Driver. Moderne Software, fühlt sich schnell und stabil an.
+GNOME läuft deutlich runder als unter Ubuntu. Mal sehen, wie lange das so bleibt – und ob mich der Rolling-Release-Charme von Arch irgendwann zurückzieht.
 
-👋 Bye bye apt,pacman — hello dnf.
+👋 Bye bye apt, pacman — hello dnf.
 
-## System-Setup: Was ich konfiguriert habe
+## System-Setup
 
-Nach der Installation habe ich mein System nach meinen Bedürfnissen eingerichtet.
+Nach der Installation habe ich das System nach meinen Bedürfnissen eingerichtet.
 
-###   **Hier ein Überblick:**
-
-### DNF-Konfiguration anpassen
-
-Zuerst habe ich die DNF-Konfiguration optimiert, um schnellere Downloads und bessere Paketverwaltung zu gewährleisten:
+### DNF-Konfiguration
 
 ```bash
 sudo nano /etc/dnf/dnf.conf
@@ -102,7 +99,7 @@ sudo dnf install nautilus-extension
 
 ### Entwicklungsumgebung
 
-Als Entwickler brauchte ich natürlich meine gewohnte Toolchain:
+Meine gewohnte Toolchain:
 
 **Git-Konfiguration**
 ```bash

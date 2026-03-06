@@ -9,7 +9,9 @@ tags: ["Homelab", "Proxmox", "Netzwerk", "Infrastructure"]
 
 # Meine Private Cloud
 
-Dies ist die Architektur meiner privaten IT-Infrastruktur. Das Ziel ist ein stabiles, energieeffizientes und wartungsarmes System, das mir die volle Kontrolle über meine Daten und Dienste gibt. Kein Schnickschnack, nur Funktion.
+**Kurzfassung:** Überblick über meine private IT-Infrastruktur – Hardware, Netzwerk, Dienste und WireGuard-Tunnel. Stabil, energieeffizient, unter meiner Kontrolle.
+
+Dies ist die Architektur meiner privaten IT-Infrastruktur. Das Ziel: ein stabiles, energieeffizientes und wartungsarmes System, das mir die volle Kontrolle über meine Daten und Dienste gibt.
 
 ## Das Fundament: Hardware und Netzwerk
 

@@ -6,59 +6,59 @@ author: "Daniel Wellermann"
 category: "DevOps"
 tags: ["Deployment", "Bash", "lftp", "WebApp"]
 ---
-# Smarter Deployen: Ein universelles Bash-Skript für moderne Web-Apps mit lftp
+# Universal WebApp Deploy Script
 
-Als Entwickler liebst du es, an deiner Web-App zu feilen – egal ob mit React, Vue, Svelte oder einem anderen modernen Framework. Das Deployment hingegen kann schnell zu einer lästigen, fehleranfälligen Routine werden.
+**Kurzfassung:** Ein Bash-Skript, das Build und SFTP-Upload per `lftp` in einem einzigen Befehl zusammenfasst. Sinnvoll für Projekte auf klassischen Webspaces ohne Git-Integration – kein CI/CD-Overhead, volle Kontrolle.
 
-Die moderne Webentwicklung predigt uns dafür eine klare Lösung: Continuous Integration und Continuous Deployment (CI/CD). Werkzeuge wie GitHub Actions, Azure DevOps Pipelines oder die Google Cloud Build-Plattform sind unglaublich mächtig und für große, kollaborative Projekte oft unerlässlich.
+## Ausgangslage
 
-Aber Hand aufs Herz: Ist es wirklich immer die beste Lösung, für ein kleines bis mittelgroßes Projekt eine komplexe CI/CD-Pipeline aufzusetzen? Manchmal ist ein einfacher, transparenter und robuster Ansatz nicht nur ausreichend, sondern für den produktiven Einsatz sogar überlegen. Gerade wenn das Ziel ein klassischer Webspace ohne Git-Integration ist und die Bereitstellung per SFTP erfolgen muss, kann ein lokales Skript Gold wert sein. Es gibt dir die volle Kontrolle, ist blitzschnell eingerichtet und erfordert keine Abhängigkeit von externen Diensten oder komplexen YAML-Konfigurationen.
+CI/CD-Pipelines sind mächtig, aber für ein kleines Projekt auf einem klassischen Webspace oft überdimensioniert. Ich wollte einen einfachen, transparenten Deployment-Prozess: bauen, hochladen, fertig – mit einem Befehl.
 
-In diesem Beitrag zeige ich dir, wie du genau so einen smarten Weg gehst. Wir erstellen ein universelles Bash-Skript, das deinen Deployment-Prozess in einen einzigen, verlässlichen Befehl verwandelt: ./deploy.sh. Effizient, sicher und für fast jedes Projekt anpassbar.
+Das Ergebnis ist `deploy.sh`: ein universelles Bash-Skript für moderne Web-Apps, das per `lftp` deployt.
 
-## Teil 1: Die Grundlage – Sichere `lftp`-Bookmarks einrichten (einmalig)
+## Teil 1: lftp-Bookmark einrichten (einmalig)
 
-Anstatt Passwörter direkt in unser Skript zu schreiben (ein absolutes No-Go!), nutzen wir die Bookmark-Funktion von `lftp`. Wir speichern eine Verbindung unter einem Alias, und `lftp` kümmert sich sicher um die Anmeldedaten.
+Passwörter gehören nicht ins Skript. Stattdessen nutze ich die Bookmark-Funktion von `lftp`: Verbindung unter einem Alias speichern, `lftp` kümmert sich um die Anmeldedaten.
 
-**Wichtiger Sicherheitshinweis:** `lftp` speichert das Passwort im Klartext in seiner Konfigurationsdatei (`~/.local/share/lftp/bookmarks` oder `~/.lftp/bookmarks`). Diese Datei wird jedoch standardmäßig mit restriktiven Rechten (`chmod 600`) angelegt, sodass nur du sie lesen kannst. Dies ist ein gewaltiger Sicherheitsgewinn gegenüber einem Passwort im Skript und für die meisten Hosting-Umgebungen ein exzellenter Kompromiss.
+> Hinweis: `lftp` speichert das Passwort im Klartext in `~/.local/share/lftp/bookmarks` oder `~/.lftp/bookmarks`. Die Datei wird standardmäßig mit `chmod 600` angelegt – nur du kannst sie lesen. Deutlich besser als ein Passwort direkt im Skript.
 
-**Schritt 1: Manuelle Verbindung für den Setup**
-Öffne dein Terminal und verbinde dich **einmalig** manuell mit deinem SFTP-Server. Ersetze die Platzhalter mit deinen Daten.
+**Schritt 1: Einmalig manuell verbinden**
+Verbinde dich einmalig manuell mit deinem SFTP-Server. Platzhalter ersetzen:
 
 ```bash
 lftp -u dein-benutzername sftp://sftp.dein-server.de
 ```
 
-`lftp` wird dich nach deinem Passwort fragen. Gib es ein und drücke Enter.
+`lftp` fragt nach dem Passwort. Eingeben und Enter.
 
 **Schritt 2: Passwortspeicherung aktivieren**
-Gib in der `lftp`-Kommandozeile (`lftp :~>`) folgenden Befehl ein. Er weist `lftp` an, bei der Erstellung des nächsten Bookmarks das Passwort mitzuspeichern.
+In der `lftp`-Kommandozeile (`lftp :~>`):
 
 ```lftp
 lftp :~> set bmk:save-passwords true
 ```
 
 **Schritt 3: Bookmark speichern**
-Speichere nun die Verbindung unter einem leicht merkbaren Namen. Diesen Namen brauchst du später im Skript.
+Verbindung unter einem leicht merkbaren Namen speichern – diesen Namen brauchst du später im Skript:
 
 ```lftp
 lftp :~> bookmark add mein-projekt
 ```
 
-**Schritt 4: Beenden und Testen**
-Verlasse `lftp` mit `exit`. Teste nun, ob der Bookmark funktioniert:
+**Schritt 4: Testen**
+`lftp` mit `exit` verlassen. Dann testen:
 
 ```bash
 lftp mein-projekt
 ```
 
-Wenn du ohne Passwortabfrage verbunden wirst, hat alles geklappt! Verlasse die Sitzung wieder mit `exit`.
+Wenn du ohne Passwortabfrage verbunden wirst, hat alles geklappt. Sitzung mit `exit` beenden.
 
 ---
 
-## Teil 2: Das Herzstück – Das universelle `deploy.sh`-Skript
+## Teil 2: Das `deploy.sh`-Skript
 
-Speichere den folgenden Code in einer Datei namens `deploy.sh` im Hauptverzeichnis deines Projekts. Die Konfiguration ist so gestaltet, dass du sie leicht für dein spezifisches Framework anpassen kannst.
+`deploy.sh` im Hauptverzeichnis des Projekts ablegen. Die Konfiguration ist so gestaltet, dass sie sich leicht für verschiedene Frameworks anpassen lässt.
 
 ```bash
 #!/bin/bash
@@ -304,26 +304,22 @@ exit 0
 
 ```
 
-## Teil 3: Anwendung in der Praxis
-
-Jetzt, wo alles vorbereitet ist, ist das Deployment ein Kinderspiel.
+## Teil 3: Deployment starten
 
 1.  **Skript konfigurieren:**
-    *   Öffne die Datei `deploy.sh`.
-    *   **Passe die `PROJEKT-EINSTELLUNGEN` an!** Überprüfe die Kommentare im Skript und setze den korrekten `NODE_COMMAND` und `LOCAL_DIR` für dein spezifisches Framework.
-    *   Trage bei `LFTP_BOOKMARK` den Namen ein, den du in Teil 1 gewählt hast.
-    *   Setze das `REMOTE_DIR` auf den Zielordner deines Webservers (z.B. `httpdocs`).
+    *   `deploy.sh` öffnen.
+    *   `PROJEKT-EINSTELLUNGEN` anpassen: korrekten `NODE_COMMAND` und `LOCAL_DIR` für das jeweilige Framework setzen.
+    *   `LFTP_BOOKMARK` auf den Namen aus Teil 1 setzen.
+    *   `REMOTE_DIR` auf den Zielordner des Webservers setzen (z. B. `httpdocs`).
 
-2.  **Skript ausführbar machen:**
-    Führe diesen Befehl **einmalig** im Terminal aus, um dem System zu erlauben, das Skript zu starten:
+2.  **Skript ausführbar machen** (einmalig):
     ```bash
     chmod +x deploy.sh
     ```
 
 3.  **Deployment starten:**
-    Ab sofort ist dein gesamter Deployment-Prozess nur noch einen Befehl entfernt. Führe einfach aus:
     ```bash
     ./deploy.sh
     ```
 
-Das Skript kümmert sich um alles Weitere: Es baut deine Anwendung, stellt eine sichere Verbindung her und synchronisiert die Dateien auf deinen Server. Effizient, sicher und für fast jedes Projekt anpassbar. Viel Spaß beim Coden
+Das Skript baut die Anwendung, stellt eine sichere Verbindung her und synchronisiert die Dateien auf den Server.

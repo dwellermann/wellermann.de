@@ -8,13 +8,13 @@ tags: ["Hardware", "Server", "DIY", "Homelab"]
 ---
 # Projekt: NUC im Servergehäuse
 
-Ein Intel NUC ist leistungsstark und effizient, aber sein Desktop-Gehäuse ist für einen strukturierten Aufbau unpraktisch. Das Ziel dieses Projekts war es, einen NUC in ein Server-Chassis zu integrieren. Das Resultat ist ein kompakter, leiser und wartungsfreundlicher Server.
+**Kurzfassung:** Intel NUC im Desktop-Gehäuse ist für ein strukturiertes Setup unpraktisch. Ich hab ihn in ein kompaktes Server-Chassis umgebaut – das Ergebnis ist leise, wartungsfreundlich und passt sauber ins Rack.
 
 ![Der fertige NUC Server im Gehäuse](/images/NUC_server_1.jpeg)
 
 ## Die Komponenten
 
-Eine überschaubare Liste an Hardware war für den Umbau notwendig.
+Für den Umbau war überschaubare Hardware nötig.
 
 -   **Basis:** Intel NUC (hier: Modell mit i3-4010U)
 -   **Gehäuse:** Ein kompaktes Servergehäuse (z.B. ein altes Firewall- oder Router-Chassis)
@@ -27,11 +27,11 @@ Eine überschaubare Liste an Hardware war für den Umbau notwendig.
 
 ## Der Umbau: Schritt für Schritt
 
-Der Prozess ist mechanisch und erfordert nur grundlegende Anpassungen.
+Der Prozess ist rein mechanisch und erfordert nur wenige Anpassungen.
 
 ### 1. Demontage und Vorbereitung des NUC
 
-Die Vorbereitung ist einfach. Es muss nur die Bodenplatte entfernt werden, um Zugang zur Platine zu erhalten.
+Bodenplatte entfernen – damit hat sich die Vorbereitung erledigt.
 
 ### 2. Montage im Gehäuse
 
@@ -51,6 +51,6 @@ Die größte Herausforderung war die Verkabelung auf engstem Raum. Standardkabel
 
 ## Ergebnis
 
-Der umgebaute NUC läuft stabil und leise als mein primärer Proxmox-Server. Die Integration in das Servergehäuse sorgt für eine saubere Optik, besseres Kabelmanagement und eine einfache Wartung.
+Der umgebaute NUC läuft stabil und leise als mein primärer Proxmox-Server. Saubere Optik, ordentliches Kabelmanagement, einfache Wartung.
 
-Ein simpler Umbau mit signifikantem praktischem Nutzen.
+Simpler Umbau, spürbarer praktischer Nutzen.
