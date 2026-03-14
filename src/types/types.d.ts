@@ -4,6 +4,8 @@ export interface CallToAction {
   variant?: "primary" | "secondary" | "link";
   icon?: string;
   ariaLabel?: string;
+  target?: string;
+  rel?: string;
 }
 
 export interface Feature {

@@ -11,28 +11,38 @@ export const siteConfig = {
   twitter: "@danielwellermann",
   ogImage: ogImage,
   socialLinks: [
-    { icon: "lucide:linkedin",
-      href: "https://www.linkedin.com/in/wellermann/" ,
+    {
+      icon: "lucide:linkedin",
+      href: "https://www.linkedin.com/in/wellermann/",
       name: "LinkedIn",
-      describe: "Verbinden Sie sich mit mir auf LinkedIn, um berufliche Updates und Einblicke zu erhalten."
+      describe: "Verbinden dich mit mir auf LinkedIn, um berufliche Updates und Einblicke zu erhalten."
     },
-    { icon: "lucide:instagram", href: "https://www.instagram.com/daniel.wellermann/" , name: "Instagram" ,
-      describe: "Folgen Sie mir auf Instagram, um Einblicke in meine Projekte, Reisen und persönlichen Interessen zu erhalten."
+    {
+      icon: "lucide:instagram", href: "https://www.instagram.com/daniel.wellermann/", name: "Instagram",
+      describe: "Folge mir auf Instagram, um Einblicke in meine Projekte, Reisen und persönlichen Interessen zu erhalten."
 
     },
-    { icon: "lucide:github", href: "https://github.com/dwellermann/" , name: "GitHub",
-      describe: "Besuchen Sie mein GitHub-Profil, um meine Projekte und Beiträge zu Open-Source-Initiativen zu sehen."
+    {
+      icon: "lucide:github", href: "https://github.com/dwellermann/", name: "GitHub",
+      describe: "Besuche mein GitHub-Profil, um meine Projekte und Beiträge zu Open-Source-Initiativen zu sehen."
     },
-    { icon: "lucide:facebook", href: "https://www.facebook.com/wellermann.daniel" , name: "Facebook",
-      describe: "Folgen Sie mir auf Facebook, um Updates und Einblicke in meine Aktivitäten zu erhalten."
+    {
+      name: "Codeberg",
+      describe: "Technische Docs, Guides & Configs",
+      href: "https://codeberg.org/dwellermann",
+      icon: "lucide:mountain",
+    },
+    {
+      icon: "lucide:facebook", href: "https://www.facebook.com/wellermann.daniel", name: "Facebook",
+      describe: "Folge mir auf Facebook, um Updates und Einblicke in meine Aktivitäten zu erhalten."
     },
   ],
   navLinks: [
     { text: "Home", href: "/" },
-  //  { text: "About", href: "/about" },
-//    { text: "Services", href: "/services" },
+    //  { text: "About", href: "/about" },
+    //    { text: "Services", href: "/services" },
     { text: "Blog", href: "/blog" },
-  { text: "Kontakt", href: "/contact" },
-//    { text: "Widgets", href: "/widgets" },
+    { text: "Kontakt", href: "/contact" },
+    //    { text: "Widgets", href: "/widgets" },
   ],
 };

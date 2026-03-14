@@ -26,7 +26,7 @@ const metadata = {
     description="+20 Jahre Baubranche, +20 Jahre GNU/Linux. Ich bin der Typ der Probleme liebt und Lösungen findet."
     actions={[
       { variant: "primary", text: "Zum Blog", href: "/blog" },
-      { variant: "secondary", text: "Technische Docs", href: "#docs" }
+      { variant: "secondary", text: "Docs on Codeberg", href: "https://codeberg.org/dwellermann", target: "_blank" , rel: "noopener noreferrer", icon: "lucide:mountain"}
     ]}
   />
 
@@ -103,64 +103,6 @@ const metadata = {
     </Fragment>
   </Content2>
 
-  <Content2
-    id="opensource"
-    classes={{ container: "min-h-screen flex flex-col justify-center" }}
-    items={[]}
-    image={openSourceImg}
-    imageAlt="Community and Open Source"
-    isReversed={true}
-    actions={[
-      { variant: "primary", text: "GitHub Profil", href: "https://github.com/dwellermann", icon: "lucide:github" }
-    ]}
-  >
-    <Fragment>
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Open Source & Community
-      </h3>
-      Gute IT braucht faire Open-Source-Anwendungen und -Lizenzen. Aus über 20 Jahren Erfahrung weiß ich: Teilen bringt uns alle weiter. Viele meiner Konfigurationen und Tools sind daher frei verfügbar.
-    </Fragment>
-  </Content2>
-
-  <Content2
-    id="opensource"
-    items={[
-      {
-        title: "Raus aus der Lizenz-Falle",
-        description:
-          "Proprietary Lock-in ist das Ende jeder Flexibilität. Open Source gibt mir die Freiheit, Tools so anzupassen, wie ich sie brauche – und nicht so, wie es ein Lizenzmodell vorschreibt.",
-        icon: "lucide:unlock",
-      },
-      {
-        title: "Code-Transparenz statt Blackbox",
-        description:
-          "Wenn ich den Quellcode nicht lesen kann, gehört die Software mir nicht wirklich. 20 Jahre Linux haben mich gelehrt: Auditierbarkeit ist die einzige Basis für echtes Vertrauen in die eigene Infrastruktur.",
-        icon: "lucide:eye",
-      },
-      {
-        title: "Wissen teilen ist kein Selbstzweck",
-        description:
-          "Egal ob LXC-Configs, Go-Tools oder Automatisierungs-Scripte: Ich stelle meine Projekte auf GitHub. Wer Wissen teilt, bekommt Qualität zurück und baut stabilere Systeme für die gesamte Community.",
-        icon: "lucide:github",
-      },
-    ]}
-    image={openSourceImg}
-    imageAlt="Open Source Community und Code"
-    isReversed={true}
-    actions={[
-      { variant: "primary", text: "Mein GitHub Profil", href: "https://github.com/dwellermann", icon: "lucide:github" }
-    ]}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Open Source ist Standard, keine Option.
-      </h3>
-      <p class="text-lg text-muted-foreground mb-4">
-        Ich habe keine Lust auf geschlossene Silos und Software, die nach Hause telefoniert. Für mich ist Open Source das Werkzeug für technische Unabhängigkeit – vom Betriebssystem bis zum BIM-Prozess.
-      </p>
-    </Fragment>
-  </Content2>
-
   <Features
     id="faq"
     classes={{ container: "min-h-screen flex flex-col justify-center" }}
@@ -192,6 +134,29 @@ const metadata = {
       },
     ]}
   />
+
+   <Content2
+    id="opensource"
+    classes={{ container: "min-h-screen flex flex-col justify-center" }}
+    items={[]}
+    image={openSourceImg}
+    imageAlt="Community and Open Source"
+    isReversed={true}
+    actions={[
+      { variant: "primary", text: "Mein Herzblut auf GitHub", href: "https://github.com/dwellermann", icon: "lucide:github" }
+    ]}
+  >
+    <Fragment>
+      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
+        Open Source
+      </h3>
+      Seit ich 15 bin, ist GNU/Linux mein Zuhause. Mit 17 habe ich mein erstes PHP-Liga-System für Counter-Strike 1.6 gehostet. Ich war damals kein Entwickler ich war Anwender! Nächte durchgetestet, Feedback gegeben und in Foren kostenlosen Support geliefert war mein Beitrag. 
+      <br /><br />
+      Das ist das Fundament, das heute oft vergessen wird: Community besteht nicht nur aus Elite-Codern, sondern aus Testern, Dokumentierern und Supportern. Dieses offene Wissen ist der einzige Grund, warum moderne KI heute überhaupt existiert. Denn eines ist klar: Closed Source hat KI sicher nicht groß gemacht! 
+      <br /><br />
+      Was mich dabei richtig abfuckt: Dass die Industrie Milliarden mit diesem Wissen scheffelt, während für die Leute an der Basis oft nicht mal ein Kaffee rausspringt. Meine Tools und Configs auf GitHub sind mein Respekt an dieses Handwerk und an jeden, der Wissen teilt, statt es einzusperren.
+    </Fragment>
+  </Content2>
 
   <div class="relative px-4 py-16 sm:px-6 mx-auto max-w-7xl lg:px-8 lg:py-20 text-center">
     <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
