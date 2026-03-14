@@ -8,6 +8,9 @@ import IchImg from "../assets/images/ich.jpeg";
 import openSourceImg from "../assets/images/open-source.png";
 import Content2 from "../components/widgets/Content2.astro";
 import ServiceListLink from "../components/widgets/ServiceListLink.astro";
+import Button from "../components/ui/Button.astro";
+import { Icon } from "astro-icon/components";
+
 const metadata = {
   title: `${siteConfig.name}`,
   description:
@@ -18,123 +21,156 @@ const metadata = {
 
 <BaseLayout {metadata}>
   <Hero
-    title={`Daniel Wellermann<br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Blog & Docs</span>`}
-    tagline="Problem Solver, Creator, Innovator"
-    description={`${siteConfig.description}`}
-
+    title={`Daniel Wellermann<br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Wo IT auf Handwerk und digitale Planung trifft</span>`}
+    tagline="BIM-Spezialist, Linux-Enthusiast und Maker"
+    description="Ich dokumentiere meine Erfahrungen in der IT-Infrastruktur, 3D-Druck und digitalen Bauplanung."
+    actions={[
+      { variant: "primary", text: "Zum Blog", href: "/blog" },
+      { variant: "secondary", text: "Technische Docs", href: "#docs" }
+    ]}
   />
-  {/*
+
   <Features
-    tagline="Features"
-    title="What's Included"
-    subtitle="A selection of tools and configurations to streamline your workflow."
+    id="features"
+    tagline="Themen-Säulen"
+    title="Meine Kerngebiete"
+    subtitle="Hier teile ich mein Wissen und meine Erfahrungen."
     features={[
       {
-        title: "Optimized SEO",
+        title: "Linux & Server (IT)",
         description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
-        icon: "lucide:scan-search",
+          "Vom Proxmox-Cluster bis zur Fedora-Workstation. Automatisierung und Stabilität stehen an erster Stelle.",
+        icon: "lucide:server",
         iconClass: "bg-blue-500/10 text-blue-400",
       },
       {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
-        icon: "lucide:zap",
+        title: "BIM & Architektur",
+        description:
+          "Digitale Bauplanung und BIM-Workflows. Die Brücke zwischen moderner IT und klassischem Bauwesen.",
+        icon: "lucide:building",
         iconClass: "bg-purple-500/10 text-purple-400",
       },
       {
-        title: "Tailwind v4",
+        title: "Handwerk & 3D-Druck",
         description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
-        icon: "lucide:palette",
+          "Vom Bit zum Objekt. Ich teile meine Erfahrungen mit Hardware-Hacks, Werkstatt-Setups und 3D-Druck-Optimierung.",
+        icon: "lucide:printer",
         iconClass: "bg-pink-500/10 text-pink-400",
       },
     ]}
   />
+
   <Content2
+    id="services"
     items={[
       {
-        title: "Responsive Design",
+        title: "LXC Container, Docker & Proxmox",
         description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
-        icon: "lucide:scan-search",
-        iconClass: "bg-blue-500/10 text-blue-400",
+          "Erstellung und Verwaltung effizienter Virtualisierungsumgebungen für Homelabs und Server.",
+        icon: "lucide:server",
       },
       {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
-        icon: "lucide:zap",
-        iconClass: "bg-purple-500/10 text-purple-400",
+        title: "Self-Hosting",
+        description:
+          "Betrieb eigener Dienste mit einem Fokus auf Datensouveränität und Sicherheit.",
+        icon: "lucide:lock",
       },
       {
-        title: "Tailwind v4",
+        title: "BIM-Management & CAD-Software",
         description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
-        icon: "lucide:palette",
-        iconClass: "bg-pink-500/10 text-pink-400",
+          "Koordination digitaler Bauprozesse, IFC-Auswertungen und Software-Einsatz im Bauwesen.",
+        icon: "lucide:box",
+      },
+      {
+        title: "Python & Scripts",
+        description:
+          "Automatisierung von Workflows, API-Anbindungen und Datenaufbereitung.",
+        icon: "lucide:terminal",
       },
     ]}
     image={IchImg}
-    imageAlt="Development"
+    imageAlt="Daniel Wellermann"
   >
     <Fragment>
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Development
+        Mein digitaler Werkzeugkasten.
       </h3>
-      We provide a solid foundation to start your projects with best practices.
+      Erfahrung in IT-Infrastruktur, BIM-Management, CAD und Linux-Administration.
     </Fragment>
   </Content2>
+
   <Content2
-    items={[
-      {
-        title: "Open Source",
-        description:
-          "Developed under the MIT license, free for personal and commercial use.",
-        icon: "lucide:github",
-        iconClass: "bg-indigo-500/10 text-indigo-400",
-      },
-      {
-        title: "Community Driven",
-        description:
-          "Built with the feedback and contributions of the developer community.",
-        icon: "lucide:users",
-        iconClass: "bg-orange-500/10 text-orange-400",
-      },
-      {
-        title: "Regular Updates",
-        description:
-          "Continuously improved with the latest technologies and best practices.",
-        icon: "lucide:refresh-cw",
-        iconClass: "bg-teal-500/10 text-teal-400",
-      },
-    ]}
+    id="opensource"
+    items={[]}
     image={openSourceImg}
     imageAlt="Community and Open Source"
     isReversed={true}
+    actions={[
+      { variant: "primary", text: "GitHub Profil", href: "https://github.com/dwellermann", icon: "lucide:github" }
+    ]}
   >
     <Fragment>
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
         Open Source & Community
       </h3>
-      Join the revolution of modern web development. This project is open for everyone
-      to use, learn from, and contribute to.
+      Ich glaube an Open Source. Viele meiner Konfigurationen und Tools sind frei verfügbar. Schau dir meine Repositories an, lerne daraus oder trage dazu bei.
     </Fragment>
   </Content2>
-  */}
 
-{/* <ServiceList />  Als Social Links*/}
-<ServiceListLink
-  title="Netzwerk"
-  subtitle="Wo du mich sicher erreichen kannst"
-  services={[
-    ...siteConfig.socialLinks.filter((social) => !["Facebook"].includes(social.name)).map((social) => (
+  <Features
+    id="faq"
+    tagline="FAQ"
+    title="Häufig gestellte Fragen"
+    subtitle="Ein paar Antworten auf Fragen, die mir oft gestellt werden."
+    features={[
       {
-        name: social.name,
-        description: social.describe,
-        icon: `${social.icon}`,
-        link: social.href,
-      }
-    ))
-  ]}
-/>
+        title: "Warum nutzt du Fedora statt Ubuntu für deine Workstation?",
+        description:
+          "Fedora bietet aktuellere Pakete und ist sehr nah an Upstream-GNOME. Das ist ideal für Entwicklung und aktuelle Hardware, bei gleichzeitig hoher Stabilität.",
+        icon: "lucide:help-circle",
+        iconClass: "bg-primary/10 text-primary",
+      },
+      {
+        title: "Was ist der Vorteil von BIM im modernen Handwerk?",
+        description:
+          "BIM ermöglicht eine durchgängige Datenkonsistenz von der Planung bis zur Ausführung. Fehler werden virtuell gelöst, bevor sie auf der Baustelle entstehen.",
+        icon: "lucide:help-circle",
+        iconClass: "bg-primary/10 text-primary",
+      },
+      {
+        title: "Warum dokumentierst du deine LXC-Configs so detailliert?",
+        description:
+          "LXC ist das Rückgrat meines Home-Labs. Eine gute Dokumentation hilft nicht nur anderen beim Einstieg, sondern ist auch für mich selbst das beste Nachschlagewerk.",
+        icon: "lucide:help-circle",
+        iconClass: "bg-primary/10 text-primary",
+      },
+    ]}
+  />
+
+  <div class="relative px-4 py-16 sm:px-6 mx-auto max-w-7xl lg:px-8 lg:py-20 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+      Interesse an einem Austausch oder hast du Fragen zu meinen Docs?
+    </h2>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <Button variant="primary" size="lg" href="/contact">
+        <Icon name="lucide:mail" class="w-5 h-5 mr-2 -ml-1" />
+        Kontakt aufnehmen
+      </Button>
+    </div>
+  </div>
+
+  <ServiceListLink
+    title="Netzwerk"
+    subtitle="Wo du mich sicher erreichen kannst"
+    services={[
+      ...siteConfig.socialLinks.filter((social) => !["Facebook"].includes(social.name)).map((social) => (
+        {
+          name: social.name,
+          description: social.describe,
+          icon: `${social.icon}`,
+          link: social.href,
+        }
+      ))
+    ]}
+  />
 </BaseLayout>
