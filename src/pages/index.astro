@@ -21,9 +21,9 @@ const metadata = {
 
 <BaseLayout {metadata}>
   <Hero
-    title={`Daniel Wellermann<br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Wo IT auf Handwerk und digitale Planung trifft</span>`}
-    tagline="BIM-Spezialist, Linux-Enthusiast und Maker"
-    description="Ich dokumentiere meine Erfahrungen in der IT-Infrastruktur, 3D-Druck und digitalen Bauplanung."
+    title={`Daniel Wellermann<br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Lösungen kein Selbstzweck</span>`}
+    tagline="Gelernter Metallbauer, BIM-Coordinator & Entwickler"
+    description="+20 Jahre Baubranche, +20 Jahre GNU/Linux. Ich bin der Typ der Probleme liebt und Lösungen findet."
     actions={[
       { variant: "primary", text: "Zum Blog", href: "/blog" },
       { variant: "secondary", text: "Technische Docs", href: "#docs" }
@@ -32,75 +32,80 @@ const metadata = {
 
   <Features
     id="features"
+    classes={{ container: "min-h-screen flex flex-col justify-center" }}
     tagline="Themen-Säulen"
-    title="Meine Kerngebiete"
+    title="Meine Spielwiese"
     subtitle="Hier teile ich mein Wissen und meine Erfahrungen."
     features={[
       {
         title: "Linux & Server (IT)",
         description:
-          "Vom Proxmox-Cluster bis zur Fedora-Workstation. Automatisierung und Stabilität stehen an erster Stelle.",
+          "Über 20 Jahre GNU/Linux-Erfahrung. Vom Ubuntu/Debian Server bis Fedora o. Arch: Meine Daten und Sicherheit stehen an erster Stelle. Ich liebe das GNU/Linux Ökosystem.",
         icon: "lucide:server",
         iconClass: "bg-blue-500/10 text-blue-400",
       },
       {
-        title: "BIM & Architektur",
+        title: "Gebäude & BIM",
         description:
-          "Digitale Bauplanung und BIM-Workflows. Die Brücke zwischen moderner IT und klassischem Bauwesen.",
+          "Als hauptberuflicher BIM-Coordinator & Developer entwickle ich spezielle Tools/Prozesse für Bau und Betrieb. Ich steh drauf Rohdaten wie IFC zu verarbeiten: für die Bauphase ist das Geil, für Betrieb noch Geiler!",
         icon: "lucide:building",
         iconClass: "bg-purple-500/10 text-purple-400",
       },
       {
-        title: "Handwerk & 3D-Druck",
+        title: "Tekkie & Macher",
         description:
-          "Vom Bit zum Objekt. Ich teile meine Erfahrungen mit Hardware-Hacks, Werkstatt-Setups und 3D-Druck-Optimierung.",
+          "Feierabend gibt es nicht. Unser Haus ist wie ein großes Experimentierfeld: Büro u. Werkstattkeller sind mit einer Treppe verbunden. Oben Ideen - Unten Umsetzung.",
         icon: "lucide:printer",
         iconClass: "bg-pink-500/10 text-pink-400",
       },
     ]}
   />
 
-  <Content2
+<Content2
     id="services"
+    classes={{ container: "min-h-screen flex flex-col justify-center" }}
     items={[
       {
-        title: "LXC Container, Docker & Proxmox",
+        title: "Virtualisierung ohne Kompromisse",
         description:
-          "Erstellung und Verwaltung effizienter Virtualisierungsumgebungen für Homelabs und Server.",
+          "Proxmox, LXC und Docker sind mein Fundament. Ich baue keine fragilen Systeme, sondern stabile Infrastrukturen, die genau das tun, was ich will – und nicht, was der Hersteller vorgibt.",
         icon: "lucide:server",
       },
       {
-        title: "Self-Hosting",
+        title: "Meine Daten gehören mir",
         description:
-          "Betrieb eigener Dienste mit einem Fokus auf Datensouveränität und Sicherheit.",
+          "Self-Hosting ist seit 20 Jahren für mich eine Grundhaltung. Alle wollen jetzt im Jahr 2026 Datensouveränität. Die gibt es für viele Probleme oft nur im Open-Source-Bereich; ich teste, unterstütze und hoffe, dass sich das Ökosystem weiterentwickelt.",
         icon: "lucide:lock",
       },
       {
-        title: "BIM-Management & CAD-Software",
+        title: "Rohdaten fressen, Lösungen ausspucken",
         description:
-          "Koordination digitaler Bauprozesse, IFC-Auswertungen und Software-Einsatz im Bauwesen.",
+          "IFC-Modelle sind für viele nur 3D-Bilder oder Visualisierungen. Ich ziehe die harten Fakten aus den Rohdaten und mache sie für die Planung, Realisierung und den Betrieb nutzbar. Für einen ordentlichen Export nerve ich gerne Autoren und CAD-Publisher.",
         icon: "lucide:box",
       },
       {
-        title: "Python & Scripts",
+        title: "Kein Programmierer, sondern Problemlöser",
         description:
-          "Automatisierung von Workflows, API-Anbindungen und Datenaufbereitung.",
+          "JavaScript, Go, Bash-Scripte, sogar Python (wenn’s sein muss). Ich entwickle Tools, um Probleme zu lösen. Domain-Driven Design ist nicht abstrakt: Die Fachlichkeit gibt den Takt vor.",
         icon: "lucide:terminal",
       },
     ]}
     image={IchImg}
     imageAlt="Daniel Wellermann"
   >
-    <Fragment>
+    <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Mein digitaler Werkzeugkasten.
+        Digitales Handwerk.
       </h3>
-      Erfahrung in IT-Infrastruktur, BIM-Management, CAD und Linux-Administration.
+      <p class="text-lg text-muted-foreground mb-4">
+        Ich nenne es nicht 'IT-Services', ich nenne es Problemlösung. Hier ist der Stack, mit dem ich täglich arbeite, experimentiere und Prozesse optimiere – egal ob im Büro oder unten an der Werkbank.
+      </p>
     </Fragment>
   </Content2>
 
   <Content2
     id="opensource"
+    classes={{ container: "min-h-screen flex flex-col justify-center" }}
     items={[]}
     image={openSourceImg}
     imageAlt="Community and Open Source"
@@ -113,35 +118,76 @@ const metadata = {
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
         Open Source & Community
       </h3>
-      Ich glaube an Open Source. Viele meiner Konfigurationen und Tools sind frei verfügbar. Schau dir meine Repositories an, lerne daraus oder trage dazu bei.
+      Gute IT braucht faire Open-Source-Anwendungen und -Lizenzen. Aus über 20 Jahren Erfahrung weiß ich: Teilen bringt uns alle weiter. Viele meiner Konfigurationen und Tools sind daher frei verfügbar.
+    </Fragment>
+  </Content2>
+
+  <Content2
+    id="opensource"
+    items={[
+      {
+        title: "Raus aus der Lizenz-Falle",
+        description:
+          "Proprietary Lock-in ist das Ende jeder Flexibilität. Open Source gibt mir die Freiheit, Tools so anzupassen, wie ich sie brauche – und nicht so, wie es ein Lizenzmodell vorschreibt.",
+        icon: "lucide:unlock",
+      },
+      {
+        title: "Code-Transparenz statt Blackbox",
+        description:
+          "Wenn ich den Quellcode nicht lesen kann, gehört die Software mir nicht wirklich. 20 Jahre Linux haben mich gelehrt: Auditierbarkeit ist die einzige Basis für echtes Vertrauen in die eigene Infrastruktur.",
+        icon: "lucide:eye",
+      },
+      {
+        title: "Wissen teilen ist kein Selbstzweck",
+        description:
+          "Egal ob LXC-Configs, Go-Tools oder Automatisierungs-Scripte: Ich stelle meine Projekte auf GitHub. Wer Wissen teilt, bekommt Qualität zurück und baut stabilere Systeme für die gesamte Community.",
+        icon: "lucide:github",
+      },
+    ]}
+    image={openSourceImg}
+    imageAlt="Open Source Community und Code"
+    isReversed={true}
+    actions={[
+      { variant: "primary", text: "Mein GitHub Profil", href: "https://github.com/dwellermann", icon: "lucide:github" }
+    ]}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
+        Open Source ist Standard, keine Option.
+      </h3>
+      <p class="text-lg text-muted-foreground mb-4">
+        Ich habe keine Lust auf geschlossene Silos und Software, die nach Hause telefoniert. Für mich ist Open Source das Werkzeug für technische Unabhängigkeit – vom Betriebssystem bis zum BIM-Prozess.
+      </p>
     </Fragment>
   </Content2>
 
   <Features
     id="faq"
-    tagline="FAQ"
-    title="Häufig gestellte Fragen"
-    subtitle="Ein paar Antworten auf Fragen, die mir oft gestellt werden."
+    classes={{ container: "min-h-screen flex flex-col justify-center" }}
+    tagline="Klartext"
+    title="Häufige Fragen"
+    subtitle="...und meine Antwort darauf"
     features={[
       {
-        title: "Warum nutzt du Fedora statt Ubuntu für deine Workstation?",
+        title: "Ist BIM nicht nur ein Hype für Großprojekte?",
         description:
-          "Fedora bietet aktuellere Pakete und ist sehr nah an Upstream-GNOME. Das ist ideal für Entwicklung und aktuelle Hardware, bei gleichzeitig hoher Stabilität.",
-        icon: "lucide:help-circle",
-        iconClass: "bg-primary/10 text-primary",
+          "BIM ist kein Hype, sondern digitales Handwerk. Wer behauptet, es sei zu kompliziert, hat oft nur Angst vor sauberen Daten. Ich nutze IFC-Rohdaten, um Fehler virtuell zu lösen, bevor sie auf der Baustelle echtes Geld und Nerven kosten. Wer nur bunte Bilder will, macht kein BIM. BTW: saubere IFCs gibts auch ohne AIA u. BAP :-P",
+        icon: "lucide:database",
+        iconClass: "bg-pink-500/10 text-pink-400",
       },
       {
-        title: "Was ist der Vorteil von BIM im modernen Handwerk?",
+        title: "Metallbau und Softwareentwicklung – wie passt das zusammen?",
         description:
-          "BIM ermöglicht eine durchgängige Datenkonsistenz von der Planung bis zur Ausführung. Fehler werden virtuell gelöst, bevor sie auf der Baustelle entstehen.",
-        icon: "lucide:help-circle",
-        iconClass: "bg-primary/10 text-primary",
+          "Perfekt. Ob ich nun Stahlträger verschweiße oder Code schreibe: Die Denkweise ist dieselbe. Man braucht einen Plan, das richtige Werkzeug und den Willen, das Projekt bis zur letzten Schraube (oder Zeile Code) konsequent durchzuziehen. Handwerk ist Logik zum Anfassen.",
+        icon: "lucide:hammer",
+        iconClass: "bg-purple-500/10 text-purple-400",
       },
-      {
-        title: "Warum dokumentierst du deine LXC-Configs so detailliert?",
+
+{
+        title: "Cloud, vServer oder Hardware im Keller ?",
         description:
-          "LXC ist das Rückgrat meines Home-Labs. Eine gute Dokumentation hilft nicht nur anderen beim Einstieg, sondern ist auch für mich selbst das beste Nachschlagewerk.",
-        icon: "lucide:help-circle",
+          "Kommt drauf an, was ich erreichen will. Sensible Daten bleiben physisch im eigenen Haus, Dienste mit hoher Erreichbarkeit kommen auf gemietetem Server aber unter meiner Kontrolle. Das ist der entscheidende Unterschied zu SaaS-Silos wie MS365 oder Google. Wartung und Sicherheit sind dabei das wichtigeste Thema: Backup, Audits gehören Automatisiert.Ich baue lieber neue Tools, statt händisch backups oder Updates zu machen.",
+        icon: "lucide:shield-check",
         iconClass: "bg-primary/10 text-primary",
       },
     ]}
@@ -159,6 +205,7 @@ const metadata = {
     </div>
   </div>
 
+  {/*
   <ServiceListLink
     title="Netzwerk"
     subtitle="Wo du mich sicher erreichen kannst"
@@ -173,4 +220,5 @@ const metadata = {
       ))
     ]}
   />
+  */}
 </BaseLayout>
