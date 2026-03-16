@@ -13,12 +13,14 @@ tags: ["OpenCloud", "Docker", "Nextcloud", "LXC", "Traefik"]
 >
 > **2025-10-05:** Installation und Grundkonfiguration abgeschlossen, Test läuft.
 
-# Open Cloud Test 4
+# OpenCloud Test #4
 
-## Vorwort
+**Kurzfassung:** Vierter Test von OpenCloud – diesmal auf dem Produktions-Proxmox, mit echter Nextcloud-Migration. Deployment via Docker Compose + Traefik, Linux-Client funktioniert.
+
+## Ausgangslage
 
 Dies ist der vierte Test seit dem Release von OpenCloud und der erste, der ernsthaft dokumentiert wird.
-Ich deploye ihn auf meinem Produktions‑Proxmox‑Server, da ich eine echte Nextcloud‑Migration testen möchte.
+Ich deploye ihn auf meinem Produktions‑Proxmox‑Server, um eine echte Nextcloud‑Migration zu testen.
 
 ## Vorbereitung
 
@@ -27,14 +29,14 @@ Es wird ein LXC‑Container mit Ubuntu 24.04 LTS erstellt und grundkonfiguriert.
 
 ## OpenCloud‑Ordner im LXC anlegen
 
-Bevor wir der OpenCloud‑Anleitung folgen, legen wir den Installationsordner an, damit mehrere Instanzen möglich sind:
+Installationsordner anlegen, damit mehrere Instanzen möglich sind:
 ```bash
 mkdir ~/opencloud4-1 && cd ~/opencloud4-1
 ```
 
 ## Anleitung von OpenCloud
 
-Ich folge der Docker‑Compose‑Anleitung von OpenCloud und nutze Traefik als Reverse‑Proxy.
+Ich folge der Docker‑Compose‑Anleitung von OpenCloud mit Traefik als Reverse‑Proxy.
 
 ## Schnelle Schritte in der Konsole
 
@@ -82,7 +84,7 @@ Prüfen:
 sudo docker ps
 ```
 
-## Testen der ereichbarkeit
+## Erreichbarkeit testen
 
 Rufe die Domain im Browser auf: https://cloud.c41.DEINE.DOMAIN
 
@@ -92,19 +94,15 @@ Rufe die Domain im Browser auf: https://cloud.c41.DEINE.DOMAIN
 
 ## OpenCloud Client für Linux
 
-Für den Test wurde der **OpenCloud Client V.2.0.0** als AppImage verwendet. Die Installation erfolgte gemäß der offiziellen OpenCloud-Dokumentation.
+Für den Test wurde der **OpenCloud Client v2.0.0** als AppImage verwendet – gemäß der offiziellen OpenCloud-Dokumentation.
 
 ### Einrichtung
 
-Die Einrichtung war einfach und problemlos. Der Client verbindet sich zuverlässig mit der OpenCloud-Instanz.
+Einfach und problemlos. Der Client verbindet sich zuverlässig mit der OpenCloud-Instanz.
 
-### Hinweis
-
-Die Version 3.* des Clients befindet sich derzeit noch in der Beta-Phase und wurde nicht getestet.
+> Hinweis: Version 3.x des Clients befindet sich noch in der Beta-Phase und wurde nicht getestet.
 
 ### Screenshot
-
-Hier ein Screenshot der Desktop-Anwendung:
 
 ![OpenCloud Client Screenshot](/images/OpenCloud-Test41-2.png)
 

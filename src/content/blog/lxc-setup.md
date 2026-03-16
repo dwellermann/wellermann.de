@@ -7,22 +7,21 @@ category: "Homelab"
 tags: ["LXC", "Proxmox", "Ubuntu", "Container"]
 ---
 # LXC Setup Anleitung
-Diese Anleitung beschreibt die Schritte zur Einrichtung eines LXC Containers in Proxmox mit Ubuntu 24.04 LTS und der Grundkonfiguration des Systems.
 
-##  Erstelle LXC Container in Proxmox.
+**Kurzfassung:** Einrichtung eines LXC-Containers in Proxmox mit Ubuntu 24.04 LTS – von der Container-Erstellung bis zur SSH-Key-Authentifizierung.
 
-```markdown
-1. Erstelle LXC Container
-  - Ubuntu 24.04 LTS
-  - Netzwerk anpassen Statische ipv4 und dhcp bei ipv6
-    - ipv4 CIDR 192.168.*.*/24
-    - ipv4 Gateway 192.168.*.1
-    - ipv6 SLAAC
-```
+Diese Anleitung beschreibt die Schritte zur Einrichtung eines LXC-Containers in Proxmox mit Ubuntu 24.04 LTS und der Grundkonfiguration des Systems.
 
-## Grundkonfiguration des Systems
+## LXC Container in Proxmox erstellen
 
-2. Konfiguration Ubuntu 24.04 LTS
+1. LXC Container erstellen:
+   - Ubuntu 24.04 LTS
+   - Netzwerk anpassen: statische IPv4, DHCP bei IPv6
+     - IPv4 CIDR: `192.168.*.*/24`
+     - IPv4 Gateway: `192.168.*.1`
+     - IPv6: SLAAC
+
+## Grundkonfiguration (Ubuntu 24.04 LTS)
 
 - Paketlisten aktualisieren.
 
@@ -91,13 +90,12 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades
 ```
 
 
-## SSH Key Authentifizierung einrichten
+## SSH-Key-Authentifizierung einrichten
 
-3. SSH Key generieren (falls noch nicht vorhanden)
+SSH-Key vom PC aus kopieren:
 
-```markdown
-3. Wechsel zu Terminal von PC
-  - `ssh-copy-id username@ip`
+```bash
+ssh-copy-id username@ip
 ```
 
 ---
