@@ -4,6 +4,7 @@ description: "Dokumentation des Umbaus eines Intel NUC in ein kompaktes Serverge
 pubDate: "2023-11-15"
 author: "Daniel Wellermann"
 category: "Hardware"
+image: "/blog/default.png"
 tags: ["Hardware", "Server", "DIY", "Homelab"]
 ---
 # Projekt: NUC im Servergehäuse

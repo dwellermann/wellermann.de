@@ -4,6 +4,7 @@ description: "Ein direkter Einblick in meine private IT-Infrastruktur – Hardwa
 pubDate: "2023-10-01"
 author: "Daniel Wellermann"
 category: "Homelab"
+image: "/blog/default.png"
 tags: ["Homelab", "Proxmox", "Netzwerk", "Infrastructure"]
 ---
 

@@ -4,6 +4,7 @@ description: "Blog über den Wechsel zu Fedora - Die Suche nach der goldenen Mit
 pubDate: "2024-11-15"
 author: "Daniel Wellermann"
 category: "Linux"
+image: "/blog/default.png"
 tags: ["Linux", "Fedora", "Ubuntu", "Arch", "Desktop"]
 ---
 
