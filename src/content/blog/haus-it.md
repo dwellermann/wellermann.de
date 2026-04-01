@@ -80,6 +80,14 @@ Die folgenden Dienste laufen auf dem **Proxmox Main** Server:
     -   **Zweck:** Netzwerkweiter DNS-Server zum Blockieren von Werbung und Trackern.
     -   **Status:** Schützt alle Geräte im Netzwerk ohne Client-Software.
 
+## Lessons Learned: Warum Proxmox und nicht Unraid oder TrueNAS?
+
+Bevor ich bei diesem Setup gelandet bin, habe ich viel experimentiert. Für ein Homelab stürzen sich viele sofort auf Unraid (wegen der leichten Erweiterbarkeit) oder TrueNAS (wegen ZFS). Mein Problem damit: Ich wollte primär Virtualisieren und erst in zweiter Linie Filesharing betreiben.
+
+- **Die Falle:** Wenn dein primäres OS eine NAS-Software ist, klebst du zwangsläufig an deren Update-Zyklen und Limitierungen bei den VMs fest.
+- **Die Lösung:** Proxmox ist ein reiner Hypervisor. Er macht genau eine Sache, und die macht er brutal gut. Wenn mir ein Container zerschießt, tangiert das nicht mein Speichersystem oder andere Dienste. 
+- **Was würde ich heute im Netzwerk anders machen?** Ich hätte direkt auf getrennte Netzwerke (VLANs) für smarte Geräte (OpenHab) und Produktivgeräte setzen sollen, anstatt alles im Nachhinein sauber trennen zu müssen. Aber aus Fehlern lernt man, und das schärft das Verständnis für Netzwerksicherheit.
+
 ## Anbindung: Der WireGuard-Tunnel
 
 Ein permanenter `WireGuard`-Tunnel verbindet mein Heimnetz mit einem gemieteten Root-Server.

@@ -49,6 +49,12 @@ Die größte Herausforderung war die Verkabelung auf engstem Raum. Standardkabel
 -   **SATA-SSD:** Die `HP S700 1TB SSD` wurde mit einem gewinkelten SATA- und Stromkabel an die NUC-Platine angeschlossen. Die SSD selbst ist fest im Gehäuse verschraubt. Ein Foto der Verschraubung reiche ich nach, sobald die nächste Wartung ansteht und das Gehäuse geöffnet wird.
 -   **Front-Panel (Power & LED):** Die Pins für den Power-Button und die Status-LEDs auf der NUC-Platine sind schwer zugänglich. Ein gewinkelter Pin-Adapter war die Lösung. Dieser musste mechanisch leicht angepasst (zugefeilt) werden, um exakt zu passen.
 
+## Kühlung und Stromverbrauch (Die harten Zahlen)
+
+Ein 19"-Gehäuse hat viel Platz, aber die NUC-Platine ist darauf eigentlich nicht ausgelegt.
+- **Kühlung:** Der kleine originale Blower-Fan des NUC reichte im engen Desktop-Gehäuse oft kaum aus. Im neuen Servergehäuse – kombiniert mit einem langsam drehenden, leisen 120mm-Gehäuselüfter – bleiben die Temperaturen dauerhaft 10–15°C kühler, selbst unter anhaltender Last.
+- **Stromverbrauch:** Das war der eigentliche Knackpunkt für dieses Setup. Ein Homelab darf kein Stromfresser sein. Der NUC zieht im Idle solide 8–10 Watt. Unter Last (mehrere LXC-Container, Pi-hole, SmartHome-Logik und I/O-Spitzen) geht er auf gerade mal 15–20 Watt hoch. Damit ist dieses Setup 100% 24/7-tauglich, ohne dass mir die Stromrechnung um die Ohren fliegt. Wer sich alte Enterprise-Hardware für zu Hause ins Rack schraubt, zahlt oft das Fünffache an Strom.
+
 ## Ergebnis
 
 Der umgebaute NUC läuft stabil und leise als mein primärer Proxmox-Server. Saubere Optik, ordentliches Kabelmanagement, einfache Wartung.

@@ -25,6 +25,13 @@ Fedora hatte ich noch nie wirklich ausprobiert. Kurzerhand entschied ich mich f�
 - **Leading edge mit QA:** Aktuelle Technologien (Wayland, PipeWire, Btrfs) werden früh geliefert, aber getestet.
 - **Flatpak statt Snap:** Bessere Integrations- und Paketphilosophie für Desktops.
 
+## Der Knackpunkt: LTS vs. Rolling Release
+
+Zwei Extreme prägen oft die Linux-Desktop-Welt: *LTS* (wie Ubuntu) und *Rolling Release* (wie Arch).
+Bei LTS-Versionen rennst du auf dem Desktop nach einem Jahr immer neueren Softwarepaketen hinterher – für Entwickler, die aktuelle Toolchains brauchen, ein echter Krampf. PPA-Chaos vorprogrammiert.
+Arch Linux auf der anderen Seite ist großartig, erfordert aber dauerhafte Aufmerksamkeit (*Bleeding Edge*).
+Für mich bringt Fedora hier die goldene Mitte: Ein Release alle 6 Monate (*Leading Edge*). Ich habe brandaktuelle Pakete, profitiere von den neuesten Wayland-Optimierungen, aber das System wird vor dem Release gründlich durch die QA-Abteilung getestet. Kein Basteln am Wochenende, um einen zerschossenen Grafiktreiber nach einem Update via Pacman händisch reparieren zu müssen.
+
 ## Server vs. Desktop
 
 Meine Server laufen weiter auf Ubuntu LTS oder Debian. Desktop und Server müssen nicht dieselbe Distribution haben. Für servernahe Tests nutze ich Container (z. B. Distrobox oder LXC):
