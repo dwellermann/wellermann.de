@@ -20,12 +20,12 @@ const metadata = {
 ---
 
 <BaseLayout {metadata}>
-  <Hero
-    title={`Daniel Wellermann<br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Technik verstehen. Probleme durchdringen. Lösungen bauen.</span>`}
+<Hero
+    title={`Daniel Wellermann<br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Technik. Probleme. Lösungen.</span>`}
     tagline="Gelernter Metallbauer · BIM-Koordinator · Entwickler"
-    description="Seit über 20 Jahren bin ich in der Baubranche und mit GNU/Linux unterwegs. Heute verbinde ich beides: Ich mache Bauinformationen nutzbar und entwickle Werkzeuge, die im Alltag weiterhelfen."
+    description="20 Jahre Baubranche treffen auf 20 Jahre GNU/Linux. Heute verbinde ich beides: Theorie und Machen. Ich muss Dinge umsetzen, sonst kann ich nicht schlafen!"
     actions={[
-      { variant: "primary", text: "Zum Blog", href: "/blog" },
+      { variant: "primary", text: "Zum Blog (Praxis-Akte)", href: "/blog" },
       { variant: "secondary", text: "Docs on Codeberg", href: "https://codeberg.org/dwellermann", target: "_blank" , rel: "noopener noreferrer", icon: "lucide:mountain"}
     ]}
   />
@@ -34,26 +34,26 @@ const metadata = {
     id="features"
     tagline="Beruf, Projekte und Neugier"
     title="Womit ich mich beschäftige"
-    subtitle="Ein Einblick in meine Arbeit und die Themen, die mich technisch interessieren."
+    subtitle="Kein Bullshit, sondern die Themen, in denen ich wirklich tief drinstecke."
     features={[
       {
         title: "GNU/Linux & Infrastruktur",
         description:
-          "Auf Servern und am Desktop setze ich unter anderem Debian, Ubuntu und Fedora ein. Mich beschäftigen Self-Hosting, Automatisierung und eine Infrastruktur, die ich verstehen und selbst betreiben kann.",
+          "Auf Servern und am Desktop setze ich unter anderem Debian, Ubuntu und Arch ein. Mich beschäftigen Self-Hosting, Automatisierung und Systeme, die mir gehören und nachvollziehbar bleiben. Keine blinde Cloud-Abhängigkeit.",
         icon: "lucide:server",
         iconClass: "bg-blue-500/10 text-blue-400",
       },
       {
-        title: "Digitale Bauprozesse",
+        title: "Digitale Bauprozesse (BIM)",
         description:
-          "Als BIM-Koordinator und Entwickler arbeite ich mit digitalen Bauprozessen und strukturierten Informationen. Ich entwickle Werkzeuge, die Bauinformationen im Planungs- und Baualltag nutzbar machen.",
+          "Als BIM-Koordinator und Entwickler arbeite ich mit strukturierten Informationen. Ich entwickle Werkzeuge und Prozesse, die IFC-Rohdaten im Planungs- und Baualltag wirklich nutzbar machen.",
         icon: "lucide:building",
         iconClass: "bg-purple-500/10 text-purple-400",
       },
-      {
+{
         title: "Technik trifft Handwerk",
         description:
-          "Bei uns ist das Haus ein kleines Experimentierfeld: Oben entstehen Ideen, unten in der Werkstatt probiere ich sie aus. Von Elektronik und 3D-Druck bis zur Hausautomatisierung – nicht jedes Projekt braucht einen Business Case.",
+          "Unser Haus ist ein kleines Experimentierfeld: Büro und Werkstattkeller trennt nur eine Treppe. Oben entstehen Konzepte, Ideen oder Code – unten in der Werkstatt wird gebaut und getestet, ob das Ganze auch in der Realität funktioniert.",
         icon: "lucide:printer",
         iconClass: "bg-pink-500/10 text-pink-400",
       },
@@ -66,23 +66,23 @@ const metadata = {
       {
         title: "Infrastruktur unter eigener Kontrolle",
         description:
-          "Proxmox, LXC und Linux bilden die Grundlage meiner Infrastruktur. Für Container setze ich aktuell bevorzugt auf Podman und Quadlets. Docker gehört weiterhin zu meinem Werkzeugkasten. Entscheidend ist für mich eine zuverlässige und nachvollziehbare Lösung.",
+          "Proxmox, LXC und Linux bilden mein Fundament. Für Container setze ich aktuell bevorzugt auf Podman und Quadlets (Docker gehört aber weiterhin zum Werkzeugkasten). Entscheidend ist für mich eine zuverlässige und nachvollziehbare Lösung.",
         icon: "lucide:server",
       },
       {
         title: "Selbst hosten. Selbst entscheiden.",
         description:
-          "Self-Hosting gibt mir Kontrolle darüber, wo meine Daten liegen und wie Dienste betrieben werden. Open Source ist dafür oft eine gute Grundlage, aber kein Selbstzweck. Ich entscheide pragmatisch, welche Lösung zum jeweiligen Zweck passt.",
+          "Self-Hosting ist für mich kein Trend, sondern seit 20 Jahren Haltung. Es gibt mir Kontrolle darüber, wo meine Daten liegen. Open Source ist dafür oft die beste Grundlage. Ich entscheide pragmatisch, nutze, teste und committe.",
         icon: "lucide:lock",
       },
       {
-        title: "Mehr als nur bunte 3D-Modelle",
+        title: "Rohdaten sind Geil, BIM auch.",
         description:
-          "IFC-Modelle sind für mich weit mehr als Geometrie und Visualisierung. Mich interessieren vor allem die Informationen dahinter. Ich entwickle Werkzeuge und Prozesse, um IFC-Daten auszuwerten, Zusammenhänge sichtbar zu machen und die Informationen für Planung, Ausführung und Betrieb nutzbar zu machen.",
+          "IFC-Modelle sind für mich keine bunten 3D-Bilder, sie sind Datenbanken. Ich ziehe nutzen aus den Rohdaten und mache sie für Planung , Ausführung und Betrieb nutzbar. Für einen ordentlichen IFC-Export nerve ich CAD-Autoren extrem gerne.",
         icon: "lucide:box",
       },
       {
-        title: "Code ist ein Werkzeug, kein Selbstzweck",
+        title: "Code ist Werkzeug, kein Selbstzweck",
         description:
           "Ich entwickle gern Software – mit JavaScript, Go, Bash oder Python. Entscheidend ist für mich zuerst die fachliche Aufgabe: Welche Informationen oder Abläufe sollen besser funktionieren? Die Technologie ist ein Werkzeug, nicht das Ziel.",
         icon: "lucide:terminal",
@@ -96,7 +96,7 @@ const metadata = {
         Digitales Handwerk
       </h3>
       <p class="text-lg text-muted-foreground mb-4">
-        Ich verbinde mein Handwerk mit digitalen Werkzeugen: vom Auswerten von IFC-Daten bis zu Lösungen, die im Alltag helfen und die ich selbst nachvollziehen kann.
+        Ich nenne es nicht 'IT-Services', ich nenne es Problemlösung. Ich verbinde mein Handwerk mit digitalen Werkzeugen: vom Auswerten von IFC-Daten bis zu Infrastruktur-Lösungen, die im Alltag funktionieren.
       </p>
     </Fragment>
   </Content2>
@@ -110,22 +110,22 @@ const metadata = {
       {
         title: "Ist BIM nur für Großprojekte sinnvoll?",
         description:
-          "BIM ist nicht automatisch sinnvoll, nur weil ein Modell 3D ist. Für mich wird es nützlich, wenn die Informationen aus dem IFC in Planung, Ausführung und Betrieb tatsächlich weiterhelfen. Dafür müssen Modellierung und Austausch stimmen – und nicht jedes Projekt braucht denselben Prozess.",
+          "BIM ist kein Hype, sondern digitales Handwerk. Wer behauptet, es sei zu kompliziert, hat oft nur Angst vor sauberen Daten. Ich nutze IFC-Rohdaten, um Fehler virtuell zu lösen, bevor sie auf der Baustelle echtes Geld kosten. BTW: Saubere IFCs gibt's auch ohne riesige Bürokratie.",
         icon: "lucide:database",
         iconClass: "bg-pink-500/10 text-pink-400",
       },
       {
         title: "Was haben Metallbau und Softwareentwicklung gemeinsam?",
         description:
-          "In beiden Bereichen muss ich erst verstehen, was gebraucht wird, dann sauber planen und das Ergebnis prüfen. Der Unterschied? Im einen Fall ist die Logik manchmal aus Stahl. Handwerk ist Logik zum Anfassen.",
+          "In beiden Bereichen muss ich erst verstehen, was gebraucht wird, dann sauber planen und das Ergebnis prüfen. Ob ich nun Stahlträger verschweiße oder Code schreibe: Die Denkweise ist dieselbe. Handwerk ist Logik zum Anfassen.",
         icon: "lucide:hammer",
         iconClass: "bg-purple-500/10 text-purple-400",
       },
 
 {
-        title: "Cloud, vServer oder eigene Hardware?",
+        title: "Cloud, vServer oder Hardware im Keller?",
         description:
-          "Das hängt vom Dienst, den Anforderungen und dem Aufwand ab. Proxmox und LXC nutze ich für eigene Systeme; für gute Erreichbarkeit von außen kann ein gemieteter Server sinnvoll sein. Unabhängig vom Standort gehören automatische Backups, Updates und ein nachvollziehbarer Betrieb für mich dazu. Selbst hosten heißt auch, Verantwortung für Wartung und Sicherheit zu übernehmen.",
+          "Kommt drauf an, was ich erreichen will. Sensible Daten bleiben im eigenen Haus (Proxmox/LXC), Dienste mit hoher Erreichbarkeit kommen auf gemietete Server, aber unter meiner Kontrolle. Selbst hosten heißt auch: Verantwortung übernehmen. Backups und Updates gehören gnadenlos automatisiert.",
         icon: "lucide:shield-check",
         iconClass: "bg-primary/10 text-primary",
       },
@@ -144,19 +144,19 @@ const metadata = {
   >
     <Fragment>
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Open Source
+        Open Source ist ein Geben und Nehmen
       </h3>
-      Mit 15 habe ich GNU/Linux für mich entdeckt. Mit 17 habe ich mein erstes PHP-Liga-System für Counter-Strike 1.6 gehostet. Ich habe getestet, Rückmeldungen gegeben und anderen in Foren geholfen – und dabei gelernt: Open Source besteht nicht nur aus Code.
+      Mit 15 habe ich GNU/Linux für mich entdeckt. Mit 17 habe ich mein erstes PHP-Liga-System für Counter-Strike 1.6 gehostet. Ich habe Nächte durchgetestet, Feedback gegeben und anderen in Foren geholfen.
       <br /><br />
-      Es lebt auch von Menschen, die dokumentieren, testen, Fragen beantworten und Wissen teilen. Ich habe viel durch die Arbeit anderer gelernt und schätze es, wenn Wissen zugänglich bleibt.
+      Das ist das Fundament, das heute oft vergessen wird: Community besteht nicht nur aus Elite-Codern, sondern aus Menschen, die dokumentieren, testen und Fragen beantworten. Dieses offene Wissen ist der Grund, warum moderne IT heute überhaupt existiert. Closed Source hat uns nicht hierher gebracht.
       <br /><br />
-      Mit meinen Tools und Konfigurationen möchte ich etwas davon zurückgeben. Nicht jede Lösung muss offen sein – sie sollte zum Zweck passen und nachvollziehbar bleiben.
+      Was mich dabei massiv stört: Dass Teile der Industrie Milliarden mit diesem Wissen scheffeln, während für die Leute an der Basis oft nicht mal ein Kaffee rausspringt. Meine Tools und Configs auf GitHub sind mein Respekt an dieses Handwerk und an jeden, der Wissen teilt, statt es einzusperren.
     </Fragment>
   </Content2>
 
   <div class="relative px-4 py-16 sm:px-6 mx-auto max-w-7xl lg:px-8 lg:py-20 text-center">
     <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
-      Fragen zu einem Projekt, BIM oder GNU/Linux? Schreib mir gern.
+      Interesse an einem Austausch, BIM oder Linux? Schreib mir gern.
     </h2>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
       <Button variant="primary" size="lg" href="/contact">
