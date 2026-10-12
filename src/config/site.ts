@@ -27,12 +27,6 @@ export const siteConfig = {
       describe: "Besuche mein GitHub-Profil, um meine Projekte und Beiträge zu Open-Source-Initiativen zu sehen."
     },
     {
-      name: "Codeberg",
-      describe: "Technische Docs, Guides & Configs",
-      href: "https://codeberg.org/dwellermann",
-      icon: "lucide:mountain",
-    },
-    {
       icon: "lucide:facebook", href: "https://www.facebook.com/wellermann.daniel", name: "Facebook",
       describe: "Folge mir auf Facebook, um Updates und Einblicke in meine Aktivitäten zu erhalten."
     },
