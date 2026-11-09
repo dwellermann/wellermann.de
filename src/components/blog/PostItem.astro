@@ -1,5 +1,4 @@
 ---
-import Tags from "../ui/Tags.astro";
 import { type CollectionEntry, render } from "astro:content";
 
 export interface Props {
@@ -8,68 +7,29 @@ export interface Props {
 
 const { post } = Astro.props;
 const { remarkPluginFrontmatter } = await render(post);
-
 const readingTime = remarkPluginFrontmatter?.minutesRead
-  ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} min read`
+  ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} min`
   : "";
+const formattedDate = post.data.pubDate.toLocaleDateString("de-DE", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
 ---
 
-<article
-  class="group relative flex flex-col justify-end overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 min-h-[350px]"
->
-  {
-    post.data.image && (
-      <>
-        <img
-          src={post.data.image}
-          alt={post.data.title}
-          class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 z-0"
-        />
-        <div class="absolute inset-0 bg-linear-to-t from-black/95 via-black/60 to-black/30 z-10 transition-colors duration-300 group-hover:from-black/80"></div>
-      </>
-    )
-  }
-
-  <div class="relative z-20 flex flex-col p-6 h-full justify-end">
-    <div class="flex-1 flex flex-col justify-end">
-      <p class="text-xs font-bold uppercase tracking-widest text-primary drop-shadow-md mb-2">
-        {post.data.author}
-      </p>
-      <a
-        href={`/blog/${post.id}`}
-        class="block before:absolute before:inset-0 before:z-10"
-      >
-        <p class={`text-2xl font-extrabold leading-tight ${post.data.image ? 'text-white' : 'text-foreground'} group-hover:text-blue-400 transition-colors drop-shadow-xl`}>
-          {post.data.title}
-        </p>
-        <p class={`mt-3 text-sm line-clamp-3 ${post.data.image ? 'text-gray-300' : 'text-muted-foreground'} drop-shadow-sm`}>
-          {post.data.description}
-        </p>
-      </a>
-    </div>
-    <div class="mt-4 flex items-center">
-      <div class={`flex space-x-2 text-xs font-semibold tracking-wider ${post.data.image ? 'text-blue-300' : 'text-muted-foreground'}`}>
-        <time datetime={post.data.pubDate.toISOString()}>
-          {
-            post.data.pubDate.toLocaleDateString("de-DE", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }
-        </time>
-        {readingTime && <span aria-hidden="true">&bull;</span>}
-        {readingTime && <span>{readingTime}</span>}
-      </div>
-    </div>
-
+<article data-post={post.data.category ?? "allgemein"} data-title={post.data.title.toLowerCase()}>
+  <a href={`/blog/${post.id}`} class="group grid gap-4 p-5 max-md:px-0">
     {
-      post.data.tags && (
-        <div class="mt-4 relative z-20">
-          <Tags tags={post.data.tags} />
-        </div>
+      post.data.image && (
+        <img src={post.data.image} alt="" class="aspect-[16/9] w-full border border-rule object-cover" loading="lazy" />
       )
     }
-  </div>
+    <div>
+      <p class="text-[11px] uppercase tracking-[.08em] text-steel">{post.data.category ?? "Allgemein"}</p>
+      <h2 class="mt-3 text-[19px] font-bold leading-[1.25] tracking-[-.02em] text-ink group-hover:underline group-hover:underline-offset-4">{post.data.title}</h2>
+      <p class="mt-3 line-clamp-3 text-[13px] leading-5 text-steel">{post.data.description}</p>
+      <p class="mt-4 text-[12px] text-smoke"><time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>{readingTime && ` · ${readingTime}`}</p>
+    </div>
+  </a>
 </article>

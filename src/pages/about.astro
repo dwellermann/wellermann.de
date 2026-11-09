@@ -1,86 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getImage } from "astro:assets";
-import Content2 from "../components/widgets/Content2.astro";
-import Values from "../components/widgets/Values.astro";
-import aboutImage from "../assets/images/about-office.webp";
 
 const metadata = {
-  title: "About us",
-  description:
-    "Learn more about our vision, values, and the team behind Astro Starter Pro.",
+  title: "Über mich",
+  description: "Hintergrund und Arbeitsweise von Daniel Wellermann.",
 };
-
-const values = [
-  {
-    title: "Innovation",
-    description:
-      "Curabitur dignissim, felis non sollicitudin molestie, urna mauris pellentesque velit, ut eleifend.",
-  },
-  {
-    title: "Commitment",
-    description:
-      "Aenean condimentum finibus mauris, a fermentum justo pan eget. Sed ultricies, neque quis.",
-  },
-  {
-    title: "Quality",
-    description:
-      "Donec sed orci tincidunt, aliquam nisl a, condimentum nunc. Nulla varius ex nec ante feugiat.",
-  },
-  {
-    title: "Transparency",
-    description:
-      "Phasellus tristique, elit dapibus cursus facilisis, lorem augue fringilla nunc, vitae fermentum.",
-  },
-  {
-    title: "Teamwork",
-    description:
-      "In hac habitasse platea dictumst. Vivamus adipiscing fermentum quam volutpat aliquam. Integer et.",
-  },
-  {
-    title: "Excellence",
-    description:
-      "Fusce at massa nec sapien auctor gravida in in tellus. Vivamus a tristique metus, et molestie.",
-  },
-];
-
-const optimizedImage = await getImage({
-  src: aboutImage,
-  format: "webp",
-});
 ---
 
 <BaseLayout {metadata}>
-  <link slot="head" rel="preload" href={optimizedImage.src} as="image" />
-  <Content2
-    title="Our Vision"
-    description={[
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    ]}
-    tagline="About"
-    image={aboutImage}
-    imageAlt="Modern web development office"
-    actions={[
-      {
-        text: "Contact Us",
-        href: "/contact",
-        variant: "primary",
-        icon: "lucide:mail",
-      },
-      {
-        text: "View Details",
-        href: "#",
-        variant: "secondary",
-        icon: "lucide:arrow-right",
-      },
-    ]}
-  />
-  <Values
-    items={values}
-    columns={3}
-    tagline="Our Values"
-    title="What Defines Us"
-    subtitle="Principles that guide our daily work"
-  />
+  <section class="frame px-6 py-20 max-md:px-5 max-md:py-14">
+    <p class="label"><b>[01]</b> Über mich</p>
+    <h1 class="mt-5 max-w-[18ch] text-[clamp(38px,5vw,60px)] font-bold leading-[1.04] tracking-[-.05em]">Handwerk und Technik gehören zusammen.</h1>
+    <div class="mt-8 max-w-[68ch] space-y-5 leading-7 text-steel">
+      <p>Ich bin gelernter Metallbauer, BIM-Koordinator und Entwickler. Mich interessiert, wie Informationen und Werkzeuge im Baualltag wirklich funktionieren – nicht nur in einer Präsentation.</p>
+      <p>Linux, Open Source und Self-Hosting begleiten mich seit vielen Jahren. Diese Haltung bringe ich auch in digitale Bauprozesse ein: Systeme sollen verständlich, belastbar und unter eigener Kontrolle sein.</p>
+    </div>
+    <a class="btn btn-primary mt-8" href="/contact">Kontakt aufnehmen <span aria-hidden="true">-&gt;</span></a>
+  </section>
 </BaseLayout>

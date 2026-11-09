@@ -6,6 +6,7 @@ User-agent: *
 Allow: /
 
 Sitemap: ${new URL("sitemap-index.xml", siteConfig.url).href}
+LLMs: ${new URL("llms.txt", siteConfig.url).href}
 `.trim();
 
 export const GET: APIRoute = () => {

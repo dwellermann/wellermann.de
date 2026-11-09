@@ -1,43 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Features from "../components/widgets/Features.astro";
-import Content from "../components/widgets/Content.astro";
-import Form from "../components/ui/Form.astro";
-import { link } from "node:fs";
 import { siteConfig } from "../config/site";
 
 const metadata = {
   title: "Kontakt",
-  description: "Nehmen Sie Kontakt mit uns auf, um Ihr nächstes Projekt zu besprechen.",
+  description: "Kontaktmöglichkeiten und Profile von Daniel Wellermann.",
 };
-
-const visionText = ["Nehmen Sie Kontakt mit uns auf, um Ihr nächstes Projekt zu besprechen."];
 ---
 
 <BaseLayout {metadata}>
-
-  <Content tagline="Kontakt" title="Kontakt" description={visionText} />
- {/*<div
-    class="reveal mx-auto max-w-xl bg-card border border-border rounded-3xl p-8 shadow-sm mb-12 md:mb-16"
-  >
-     <Form />
-
-  </div>*/}
-  <Features
-    tagline=""
-    title=""
-    subtitle=""
-    classes={{ container: "pt-0 md:pt-0" }}
-    features={[
-      ...siteConfig.socialLinks.filter((social) => ![""].includes(social.name)).map((social) => (
-            {
-        title: social.name,
-        description: social.describe,
-        icon: `${social.icon}`,
-        iconClass: "bg-blue-500/10 text-blue-400",
-        link: social.href,
+  <section class="relative overflow-hidden border-b border-rule">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="frame relative px-6 py-20 max-md:px-5 max-md:py-14">
+      <p class="label"><b>[01]</b> Kontakt</p>
+      <h1 class="mt-5 max-w-[16ch] text-[clamp(42px,5.6vw,64px)] font-bold leading-[1.02] tracking-[-.05em]">Lass uns austauschen.</h1>
+      <p class="mt-6 max-w-[58ch] leading-7 text-steel">Du möchtest über BIM, Linux, Infrastruktur, Open Source oder ein konkretes Problem sprechen? Über diese Profile erreichst du mich direkt.</p>
+    </div>
+  </section>
+  <section class="frame px-6 py-14 max-md:px-5">
+    <ul class="border-t border-rule">
+      {
+        siteConfig.socialLinks.map((social, index) => (
+          <li>
+            <a href={social.href} target="_blank" rel="noopener noreferrer" class="group grid grid-cols-[3ch_1fr_auto] items-center gap-4 border-b border-rule py-6">
+              <span class="text-smoke">0{index + 1}</span>
+              <span><span class="block text-xl font-bold tracking-[-.02em] text-ink group-hover:underline group-hover:underline-offset-4">{social.name}</span><span class="mt-2 block max-w-[60ch] text-[13px] leading-5 text-steel">{social.describe}</span></span>
+              <span class="text-stone group-hover:text-ink" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))
       }
-      ))
-    ]}
-  />
+    </ul>
+  </section>
 </BaseLayout>

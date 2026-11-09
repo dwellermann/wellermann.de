@@ -1,63 +1,30 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import Headline from "../../../components/ui/Headline.astro";
 import PostItem from "../../../components/blog/PostItem.astro";
+import Schema from "../../../components/seo/Schema.astro";
+import { siteConfig } from "../../../config/site";
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("blog");
-  const posts = allPosts.filter((post) => post.data && post.data.pubDate); // Ensure published
-
-  const tags = new Set();
-  posts.forEach((post) => {
-    post.data.tags?.forEach((tag) => tags.add(tag));
-  });
-
-  return Array.from(tags).map((tag) => {
-    return {
-      params: { tag: tag as string },
-      props: {
-        tag,
-        posts: posts.filter((post) => post.data.tags?.includes(tag as string)),
-      },
-    };
-  });
+  const posts = await getCollection("blog");
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags ?? []))];
+  return tags.map((tag) => ({ params: { tag }, props: { tag, posts: posts.filter((post) => post.data.tags?.includes(tag)) } }));
 }
 
 const { tag, posts } = Astro.props;
-
-const metadata = {
-  title: `Posts tagged with '${tag}'`,
-  description: `Explore our articles about ${tag}.`,
-};
+const url = new URL(Astro.url.pathname, siteConfig.url).href;
+const metadata = { title: `Schlagwort: ${tag}`, description: `Beiträge mit dem Schlagwort ${tag}.` };
 ---
 
-<BaseLayout metadata={metadata}>
-  <section class="relative px-4 py-24 sm:px-6 lg:px-8 md:py-32">
-    <div class="relative mx-auto max-w-5xl">
-      <Headline
-        tagline="Tag"
-        title={`#${tag}`}
-        subtitle={`Showing ${posts.length} article${posts.length === 1 ? "" : "s"}.`}
-        classes={{
-          container: "mb-12 text-center",
-          title:
-            "font-heading mb-4 text-4xl font-bold tracking-tight text-foreground md:text-6xl capitalized",
-          subtitle: "mx-auto max-w-3xl text-xl text-muted-foreground",
-        }}
-      />
-
-      <div class="mb-8 text-center">
-        <a href="/blog" class="text-primary hover:underline">← Back to blog</a>
-      </div>
-
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {
-          posts
-            .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-            .map((post) => <PostItem post={post} />)
-        }
-      </div>
+<BaseLayout {metadata}>
+  <Schema type="BreadcrumbList" data={{ breadcrumbs: [{ name: "Home", url: siteConfig.url }, { name: "Blog", url: new URL("/blog", siteConfig.url).href }, { name: `#${tag}`, url }] }} />
+  <section class="frame px-6 py-16 max-md:px-5 max-md:py-10">
+    <p class="label"><b>[01]</b> Schlagwort</p>
+    <h1 class="mt-4 text-[clamp(34px,5vw,58px)] font-bold tracking-[-.05em]">#{tag}</h1>
+    <p class="mt-4 text-steel">{posts.length} {posts.length === 1 ? "Beitrag" : "Beiträge"} mit diesem Schlagwort.</p>
+    <a class="mt-6 inline-block text-link hover:underline" href="/blog">← Alle Beiträge</a>
+    <div class="mt-10 grid border border-rule md:grid-cols-2 lg:grid-cols-3">
+      {posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).map((post, index) => <div class:list={["border-rule", index > 0 && "border-t md:border-t-0 md:border-l", index >= 3 && "lg:border-t"]}><PostItem {post} /></div>)}
     </div>
   </section>
 </BaseLayout>

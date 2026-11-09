@@ -2,35 +2,27 @@
 import { siteConfig } from "../../config/site";
 ---
 
-<footer class="mt-20 border-t border-border bg-card">
-  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
-      <div class="flex flex-col items-center gap-2 md:items-start">
-        <span class="text-lg font-bold text-foreground">{siteConfig.name}</span>
-        <p class="text-sm text-muted-foreground">
-          {siteConfig.description}
-        </p>
+<footer class="border-t border-rule">
+  <div class="frame px-6 py-10 max-md:px-5">
+    <div class="flex flex-wrap items-start justify-between gap-8">
+      <div class="max-w-[52ch]">
+        <p class="font-bold text-ink">{siteConfig.name}</p>
+        <p class="mt-2 text-[13px] leading-5 text-steel">{siteConfig.description}</p>
       </div>
-      <div class="flex items-center gap-6">
-              {
-        siteConfig.socialLinks.map((social) => (
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-muted-foreground transition-colors hover:text-primary"
-          >
-            {social.name}
-          </a>
-        ))
-      }
-      </div>
+      <nav aria-label="Profile">
+        <p class="label">Profile</p>
+        <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[13px]">
+          {
+            siteConfig.socialLinks.map((social) => (
+              <li><a class="text-link hover:underline" href={social.href} target="_blank" rel="noopener noreferrer">{social.name}</a></li>
+            ))
+          }
+        </ul>
+      </nav>
     </div>
-    <div
-      class="mt-8 border-t border-border pt-8 text-center text-xs text-muted-foreground"
-    >
-      &copy; {new Date().getFullYear()}
-      {siteConfig.author}. All rights reserved.
+    <div class="mt-8 flex flex-wrap justify-between gap-3 border-t border-rule pt-5 text-[12px] text-smoke">
+      <span>&copy; {new Date().getFullYear()} {siteConfig.author}</span>
+      <a href="/llms.txt" class="hover:text-ink">Für KI-Systeme: llms.txt</a>
     </div>
   </div>
 </footer>

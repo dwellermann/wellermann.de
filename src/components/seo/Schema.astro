@@ -1,6 +1,11 @@
 ---
 import { siteConfig } from "../../config/site";
 
+interface Breadcrumb {
+  name: string;
+  url: string;
+}
+
 interface Props {
   type: "WebSite" | "BlogPosting" | "BreadcrumbList";
   data: {
@@ -10,6 +15,7 @@ interface Props {
     pubDate?: Date;
     author?: string;
     url?: string;
+    breadcrumbs?: Breadcrumb[];
   };
 }
 
@@ -20,15 +26,24 @@ let schema = {};
 if (type === "WebSite") {
   schema = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    description: siteConfig.description,
-    author: {
-      "@type": "Person",
-      name: siteConfig.author,
-    },
-    sameAs: siteConfig.socialLinks.map((s) => s.href),
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${siteConfig.url}/#person`,
+        name: siteConfig.author,
+        url: siteConfig.url,
+        sameAs: siteConfig.socialLinks.map((s) => s.href),
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        description: siteConfig.description,
+        inLanguage: siteConfig.lang,
+        publisher: { "@id": `${siteConfig.url}/#person` },
+      },
+    ],
   };
 } else if (type === "BlogPosting") {
   schema = {
@@ -46,15 +61,18 @@ if (type === "WebSite") {
       "@type": "WebPage",
       "@id": data.url,
     },
-    publisher: {
-      "@type": "Organization",
-      name: siteConfig.name,
-      logo: {
-        "@type": "ImageObject",
-        // Placeholder, ideally should be a real logo URL
-        url: new URL("/favicon.svg", siteConfig.url).toString(),
-      },
-    },
+    publisher: { "@id": `${siteConfig.url}/#person` },
+  };
+} else if (type === "BreadcrumbList") {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: (data.breadcrumbs ?? []).map((breadcrumb, position) => ({
+      "@type": "ListItem",
+      position: position + 1,
+      name: breadcrumb.name,
+      item: breadcrumb.url,
+    })),
   };
 }
 ---

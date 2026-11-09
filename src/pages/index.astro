@@ -1,185 +1,136 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig } from "../config/site";
-import Hero from "../components/widgets/Hero.astro";
-import Features from "../components/widgets/Features.astro";
-import devImg from "../assets/images/dev_balanced.png";
 import IchImg from "../assets/images/ich.jpeg";
 import openSourceImg from "../assets/images/open-source.png";
-import Content2 from "../components/widgets/Content2.astro";
-import ServiceListLink from "../components/widgets/ServiceListLink.astro";
-import Button from "../components/ui/Button.astro";
-import { Icon } from "astro-icon/components";
+import { siteConfig } from "../config/site";
 
 const metadata = {
-  title: `${siteConfig.name}`,
+  title: siteConfig.name,
   description:
     "Die persönliche Website von Daniel Wellermann: BIM-Koordinator und Entwickler mit Interesse an digitalen Bauprozessen, IFC, GNU/Linux, Open Source und eigenen technischen Projekten.",
   ignoreTitleTemplate: true,
 };
+
+const topics = [
+  {
+    title: "GNU/Linux & Infrastruktur",
+    description:
+      "Auf Servern und am Desktop setze ich Debian, Ubuntu und Arch ein. Mich beschäftigen Self-Hosting, Automatisierung und Systeme, die mir gehören und nachvollziehbar bleiben. Keine blinde Cloud-Abhängigkeit.",
+  },
+  {
+    title: "Digitale Bauprozesse (BIM)",
+    description:
+      "Als BIM-Koordinator und Entwickler arbeite ich mit strukturierten Informationen. Ich entwickle Werkzeuge und Prozesse, die IFC-Rohdaten im Planungs- und Baualltag wirklich nutzbar machen.",
+  },
+  {
+    title: "Technik trifft Handwerk",
+    description:
+      "Unser Haus ist ein Experimentierfeld: Oben entstehen Konzepte, Ideen oder Code – unten in der Werkstatt wird gebaut und getestet, ob das Ganze auch in der Realität funktioniert.",
+  },
+];
+
+const principles = [
+  ["Infrastruktur unter eigener Kontrolle", "Proxmox, LXC und Linux bilden mein Fundament. Für Container setze ich bevorzugt auf Podman und Quadlets. Entscheidend ist eine zuverlässige und nachvollziehbare Lösung."],
+  ["Selbst hosten. Selbst entscheiden.", "Self-Hosting ist für mich kein Trend, sondern seit 20 Jahren Haltung. Es gibt mir Kontrolle darüber, wo meine Daten liegen. Open Source ist dafür oft die beste Grundlage."],
+  ["Rohdaten sind geil, BIM auch.", "IFC-Modelle sind für mich keine bunten 3D-Bilder, sie sind Datenbanken. Ich mache die Rohdaten für Planung, Ausführung und Betrieb nutzbar."],
+  ["Code ist Werkzeug, kein Selbstzweck", "Ich entwickle gern mit JavaScript, Go, Bash oder Python. Entscheidend ist zuerst die fachliche Aufgabe: Welche Information oder welcher Ablauf soll besser funktionieren?"],
+];
+
+const questions = [
+  ["Ist BIM nur für Großprojekte sinnvoll?", "BIM ist kein Hype, sondern digitales Handwerk. Ich nutze IFC-Rohdaten, um Fehler virtuell zu lösen, bevor sie auf der Baustelle echtes Geld kosten. Saubere IFCs gibt es auch ohne riesige Bürokratie."],
+  ["Was haben Metallbau und Softwareentwicklung gemeinsam?", "In beiden Bereichen muss ich erst verstehen, was gebraucht wird, dann sauber planen und das Ergebnis prüfen. Ob Stahlträger oder Code: Die Denkweise ist dieselbe. Handwerk ist Logik zum Anfassen."],
+  ["Cloud, vServer oder Hardware im Keller?", "Kommt darauf an, was ich erreichen will. Sensible Daten bleiben im eigenen Haus, Dienste mit hoher Erreichbarkeit kommen auf gemietete Server – aber unter meiner Kontrolle. Backups und Updates gehören automatisiert."],
+];
 ---
 
 <BaseLayout {metadata}>
-<Hero
-    title={`Daniel Wellermann<br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Technik. Probleme. Lösungen.</span>`}
-    tagline="Gelernter Metallbauer · BIM-Koordinator · Entwickler"
-    description="20 Jahre Baubranche treffen auf 20 Jahre GNU/Linux. Heute verbinde ich beides: Theorie und Machen. Ich muss Dinge umsetzen, sonst kann ich nicht schlafen!"
-    actions={[
-      { variant: "primary", text: "Zum Blog (Praxis-Akte)", href: "/blog" },
-      { variant: "secondary", text: "Mein GitHub", href: "https://github.com/dwellermann", target: "_blank" , rel: "noopener noreferrer", icon: "lucide:github"}
-    ]}
-  />
-
-  <Features
-    id="features"
-    tagline="Beruf, Projekte und Neugier"
-    title="Womit ich mich beschäftige"
-    subtitle="Kein Bullshit, sondern die Themen, in denen ich wirklich tief drinstecke."
-    features={[
-      {
-        title: "GNU/Linux & Infrastruktur",
-        description:
-          "Auf Servern und am Desktop setze ich unter anderem Debian, Ubuntu und Arch ein. Mich beschäftigen Self-Hosting, Automatisierung und Systeme, die mir gehören und nachvollziehbar bleiben. Keine blinde Cloud-Abhängigkeit.",
-        icon: "lucide:server",
-        iconClass: "bg-blue-500/10 text-blue-400",
-      },
-      {
-        title: "Digitale Bauprozesse (BIM)",
-        description:
-          "Als BIM-Koordinator und Entwickler arbeite ich mit strukturierten Informationen. Ich entwickle Werkzeuge und Prozesse, die IFC-Rohdaten im Planungs- und Baualltag wirklich nutzbar machen.",
-        icon: "lucide:building",
-        iconClass: "bg-purple-500/10 text-purple-400",
-      },
-{
-        title: "Technik trifft Handwerk",
-        description:
-          "Unser Haus ist ein kleines Experimentierfeld: Büro und Werkstattkeller trennt nur eine Treppe. Oben entstehen Konzepte, Ideen oder Code – unten in der Werkstatt wird gebaut und getestet, ob das Ganze auch in der Realität funktioniert.",
-        icon: "lucide:printer",
-        iconClass: "bg-pink-500/10 text-pink-400",
-      },
-    ]}
-  />
-
-<Content2
-    id="services"
-    items={[
-      {
-        title: "Infrastruktur unter eigener Kontrolle",
-        description:
-          "Proxmox, LXC und Linux bilden mein Fundament. Für Container setze ich aktuell bevorzugt auf Podman und Quadlets (Docker gehört aber weiterhin zum Werkzeugkasten). Entscheidend ist für mich eine zuverlässige und nachvollziehbare Lösung.",
-        icon: "lucide:server",
-      },
-      {
-        title: "Selbst hosten. Selbst entscheiden.",
-        description:
-          "Self-Hosting ist für mich kein Trend, sondern seit 20 Jahren Haltung. Es gibt mir Kontrolle darüber, wo meine Daten liegen. Open Source ist dafür oft die beste Grundlage. Ich entscheide pragmatisch, nutze, teste und committe.",
-        icon: "lucide:lock",
-      },
-      {
-        title: "Rohdaten sind Geil, BIM auch.",
-        description:
-          "IFC-Modelle sind für mich keine bunten 3D-Bilder, sie sind Datenbanken. Ich ziehe Nutzen aus den Rohdaten und mache sie für Planung , Ausführung und Betrieb nutzbar. Für einen ordentlichen IFC-Export nerve ich CAD-Autoren extrem gerne.",
-        icon: "lucide:box",
-      },
-      {
-        title: "Code ist Werkzeug, kein Selbstzweck",
-        description:
-          "Ich entwickle gern Software – mit JavaScript, Go, Bash oder Python. Entscheidend ist für mich zuerst die fachliche Aufgabe: Welche Informationen oder Abläufe sollen besser funktionieren? Die Technologie ist ein Werkzeug, nicht das Ziel.",
-        icon: "lucide:terminal",
-      },
-    ]}
-    image={IchImg}
-    imageAlt="Daniel Wellermann"
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Digitales Handwerk
-      </h3>
-      <p class="text-lg text-muted-foreground mb-4">
-        Ich nenne es nicht 'IT-Services', ich nenne es Problemlösung. Ich verbinde mein Handwerk mit digitalen Werkzeugen: vom Auswerten von IFC-Daten bis zu Infrastruktur-Lösungen, die im Alltag funktionieren.
+  <section class="relative overflow-hidden border-b border-rule">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="frame relative px-6 py-18 lg:py-28 max-md:px-5 max-md:py-14">
+      <p class="label"><b>[01]</b> Profil / Velen, Deutschland</p>
+      <h1 class="mt-5 max-w-[12ch] text-[clamp(42px,6.2vw,76px)] font-bold leading-[.98] tracking-[-.06em]">
+        Technik.<br />Probleme.<br /><span class="text-cta">Lösungen.</span>
+      </h1>
+      <p class="mt-7 max-w-[58ch] text-[16px] leading-7 text-steel">
+        20 Jahre Baubranche treffen auf 20 Jahre GNU/Linux. Heute verbinde ich beides: Theorie und Machen. Ich muss Dinge umsetzen, sonst kann ich nicht schlafen.
       </p>
-    </Fragment>
-  </Content2>
-
-  <Features
-    id="faq"
-    tagline="Fragen & Antworten"
-    title="Ein paar klare Standpunkte"
-    subtitle="Meine Sicht auf BIM, Handwerk und Infrastruktur."
-    features={[
-      {
-        title: "Ist BIM nur für Großprojekte sinnvoll?",
-        description:
-          "BIM ist kein Hype, sondern digitales Handwerk. Wer behauptet, es sei zu kompliziert, hat oft nur Angst vor sauberen Daten. Ich nutze IFC-Rohdaten, um Fehler virtuell zu lösen, bevor sie auf der Baustelle echtes Geld kosten. BTW: Saubere IFCs gibt's auch ohne riesige Bürokratie.",
-        icon: "lucide:database",
-        iconClass: "bg-pink-500/10 text-pink-400",
-      },
-      {
-        title: "Was haben Metallbau und Softwareentwicklung gemeinsam?",
-        description:
-          "In beiden Bereichen muss ich erst verstehen, was gebraucht wird, dann sauber planen und das Ergebnis prüfen. Ob ich nun Stahlträger verschweiße oder Code schreibe: Die Denkweise ist dieselbe. Handwerk ist Logik zum Anfassen.",
-        icon: "lucide:hammer",
-        iconClass: "bg-purple-500/10 text-purple-400",
-      },
-
-{
-        title: "Cloud, vServer oder Hardware im Keller?",
-        description:
-          "Kommt drauf an, was ich erreichen will. Sensible Daten bleiben im eigenen Haus (Proxmox/LXC), Dienste mit hoher Erreichbarkeit kommen auf gemietete Server, aber unter meiner Kontrolle. Selbst hosten heißt auch: Verantwortung übernehmen. Backups und Updates gehören gnadenlos automatisiert.",
-        icon: "lucide:shield-check",
-        iconClass: "bg-primary/10 text-primary",
-      },
-    ]}
-  />
-
-   <Content2
-    id="opensource"
-    items={[]}
-    image={openSourceImg}
-    imageAlt="Community and Open Source"
-    isReversed={true}
-    actions={[
-      { variant: "primary", text: "Mein Herzblut auf GitHub", href: "https://github.com/dwellermann", icon: "lucide:github" }
-    ]}
-  >
-    <Fragment>
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Open Source ist ein Geben und Nehmen
-      </h3>
-      Mit 15 habe ich GNU/Linux für mich entdeckt. Mit 17 habe ich mein erstes PHP-Liga-System für Counter-Strike 1.6 gehostet. Ich habe Nächte durchgetestet, Feedback gegeben und anderen in Foren geholfen.
-      <br /><br />
-      Das ist das Fundament, das heute oft vergessen wird: Community besteht nicht nur aus Elite-Codern, sondern aus Menschen, die dokumentieren, testen und Fragen beantworten. Dieses offene Wissen ist der Grund, warum moderne IT heute überhaupt existiert. Closed Source hat uns nicht hierher gebracht.
-      <br /><br />
-      Was mich dabei massiv stört: Dass Teile der Industrie Milliarden mit diesem Wissen scheffeln, während für die Leute an der Basis oft nicht mal ein Kaffee rausspringt. Meine Tools und Configs auf GitHub sind mein Respekt an dieses Handwerk und an jeden, der Wissen teilt, statt es einzusperren.
-    </Fragment>
-  </Content2>
-
-  <div class="relative px-4 py-16 sm:px-6 mx-auto max-w-7xl lg:px-8 lg:py-20 text-center">
-    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
-      Interesse an einem Austausch, BIM oder Linux? Schreib mir gern.
-    </h2>
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <Button variant="primary" size="lg" href="/contact">
-        <Icon name="lucide:mail" class="w-5 h-5 mr-2 -ml-1" />
-        Kontakt aufnehmen
-      </Button>
+      <p class="mt-5 text-[13px] text-smoke">Gelernter Metallbauer · BIM-Koordinator · Entwickler</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="btn btn-primary" href="/blog">Zum Blog <span aria-hidden="true">-&gt;</span></a>
+        <a class="btn btn-ghost" href="https://github.com/dwellermann" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
-  </div>
+  </section>
 
-  {/*
-  <ServiceListLink
-    title="Netzwerk"
-    subtitle="Wo du mich sicher erreichen kannst"
-    services={[
-      ...siteConfig.socialLinks.filter((social) => !["Facebook"].includes(social.name)).map((social) => (
-        {
-          name: social.name,
-          description: social.describe,
-          icon: `${social.icon}`,
-          link: social.href,
-        }
-      ))
-    ]}
-  />
-  */}
+  <section class="frame px-6 py-20 max-md:px-5 max-md:py-14">
+    <p class="label"><b>[02]</b> Beruf, Projekte und Neugier</p>
+    <h2 class="mt-4 max-w-[18ch] text-[clamp(32px,4.2vw,52px)] font-bold leading-[1.04] tracking-[-.045em]">Womit ich mich beschäftige</h2>
+    <p class="mt-4 max-w-[62ch] leading-7 text-steel">Kein Bullshit, sondern die Themen, in denen ich wirklich tief drinstecke.</p>
+    <ul class="mt-10 grid border border-rule md:grid-cols-3">
+      {topics.map((topic, index) => (
+        <li class:list={["p-6", index > 0 && "border-t border-rule md:border-t-0 md:border-l"]}>
+          <span class="label">0{index + 1}</span>
+          <h3 class="mt-4 text-xl font-bold tracking-[-.025em]">{topic.title}</h3>
+          <p class="mt-4 text-[14px] leading-6 text-steel">{topic.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="border-y border-rule bg-tint">
+    <div class="frame grid gap-10 px-6 py-20 lg:grid-cols-[.8fr_1.2fr] max-md:px-5 max-md:py-14">
+      <div>
+        <img src={IchImg.src} width={IchImg.width} height={IchImg.height} alt="Daniel Wellermann" class="aspect-square w-full border border-rule object-cover" />
+      </div>
+      <div>
+        <p class="label"><b>[03]</b> Digitales Handwerk</p>
+        <h2 class="mt-4 text-[clamp(30px,4vw,48px)] font-bold tracking-[-.045em]">Verstehen. Planen. Umsetzen.</h2>
+        <p class="mt-5 max-w-[60ch] leading-7 text-steel">Ich nenne es nicht IT-Services, ich nenne es Problemlösung. Ich verbinde mein Handwerk mit digitalen Werkzeugen: vom Auswerten von IFC-Daten bis zu Infrastruktur-Lösungen, die im Alltag funktionieren.</p>
+        <ul class="mt-8 border-t border-rule">
+          {principles.map(([title, description], index) => (
+            <li class="grid gap-3 border-b border-rule py-5 sm:grid-cols-[3ch_1fr]">
+              <span class="text-smoke">0{index + 1}</span>
+              <div><h3 class="font-bold text-ink">{title}</h3><p class="mt-2 text-[14px] leading-6 text-steel">{description}</p></div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="frame px-6 py-20 max-md:px-5 max-md:py-14">
+    <p class="label"><b>[04]</b> Fragen & Antworten</p>
+    <h2 class="mt-4 text-[clamp(30px,4vw,48px)] font-bold tracking-[-.045em]">Ein paar klare Standpunkte</h2>
+    <div class="mt-8 divide-y divide-rule border-y border-rule">
+      {questions.map(([question, answer], index) => (
+        <details class="group py-5">
+          <summary class="flex cursor-pointer items-center gap-4 font-bold text-ink"><span class="text-smoke">0{index + 1}</span><span>{question}</span><span class="ml-auto text-smoke group-open:hidden">+</span><span class="ml-auto hidden text-smoke group-open:block">−</span></summary>
+          <p class="max-w-[72ch] pt-4 pl-[3.1ch] leading-7 text-steel">{answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-rule">
+    <div class="frame grid gap-10 px-6 py-20 lg:grid-cols-[1.1fr_.9fr] max-md:px-5 max-md:py-14">
+      <div>
+        <p class="label"><b>[05]</b> Open Source</p>
+        <h2 class="mt-4 text-[clamp(30px,4vw,48px)] font-bold leading-[1.05] tracking-[-.045em]">Open Source ist ein Geben und Nehmen</h2>
+        <div class="mt-6 max-w-[66ch] space-y-5 leading-7 text-steel">
+          <p>Mit 15 habe ich GNU/Linux für mich entdeckt. Mit 17 habe ich mein erstes PHP-Liga-System für Counter-Strike 1.6 gehostet. Ich habe Nächte durchgetestet, Feedback gegeben und anderen in Foren geholfen.</p>
+          <p>Community besteht nicht nur aus Elite-Codern, sondern aus Menschen, die dokumentieren, testen und Fragen beantworten. Dieses offene Wissen ist das Fundament moderner IT.</p>
+          <p>Meine Tools und Configs auf GitHub sind mein Respekt an dieses Handwerk und an jeden, der Wissen teilt, statt es einzusperren.</p>
+        </div>
+        <a class="btn btn-ghost mt-8" href="https://github.com/dwellermann" target="_blank" rel="noopener noreferrer">Mein Herzblut auf GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+      <img src={openSourceImg.src} width={openSourceImg.width} height={openSourceImg.height} alt="Community und Open Source" class="w-full self-center border border-rule" />
+    </div>
+  </section>
+
+  <section class="bg-cta">
+    <div class="frame flex flex-wrap items-center justify-between gap-8 px-6 py-16 max-md:px-5 max-md:py-12">
+      <div><p class="label text-black/60"><b>[06]</b> Austausch</p><h2 class="mt-3 max-w-[24ch] text-[clamp(28px,4vw,46px)] font-bold leading-[1.05] tracking-[-.045em]">Interesse an BIM, Linux oder einer guten Lösung?</h2></div>
+      <a class="btn btn-inverse" href="/contact">Kontakt aufnehmen <span aria-hidden="true">-&gt;</span></a>
+    </div>
+  </section>
 </BaseLayout>

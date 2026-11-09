@@ -1,88 +1,95 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Schema from "../../components/seo/Schema.astro";
-
 import { getCollection, render } from "astro:content";
+import { siteConfig } from "../../config/site";
 
 export async function getStaticPaths() {
-  const blog = await getCollection("blog");
-  return blog.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
 }
 
-const { post } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(post);
-const { title, description, pubDate, author, image } = post.data;
-
+const { post, posts } = Astro.props;
+const { Content, headings, remarkPluginFrontmatter } = await render(post);
+const { title, description, pubDate, author, image, category, tags } = post.data;
+const toc = headings.filter((heading) => heading.depth === 2);
+const relatedPosts = posts
+  .filter((candidate) => candidate.id !== post.id)
+  .sort((a, b) => {
+    const relevance = (candidate: (typeof posts)[number]) =>
+      Number(candidate.data.category === category) +
+      (candidate.data.tags ?? []).filter((tag) => tags?.includes(tag)).length;
+    return relevance(b) - relevance(a) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  })
+  .slice(0, 3);
 const formattedDate = pubDate.toLocaleDateString("de-DE", {
   year: "numeric",
   month: "long",
   day: "numeric",
 });
-
-const readingTime = remarkPluginFrontmatter?.minutesRead
-  ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} min Lesezeit`
-  : "";
-
-const metadata = {
-  title: title,
-  description: description,
-  ogImage: image,
-};
+const readingTime = remarkPluginFrontmatter?.minutesRead ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} min Lesezeit` : "";
+const url = new URL(Astro.url.pathname, siteConfig.url).href;
+const metadata = { title, description, ogImage: image };
 ---
 
-<BaseLayout metadata={metadata}>
-  <Schema
-    type="BlogPosting"
-    data={{
-      title,
-      description,
-      image,
-      pubDate,
-      author,
-      url: Astro.url.href,
-    }}
-  />
-  <div class="relative w-full">
-    {
-      image ? (
-        <div class="relative w-full h-[50vh] min-h-[400px] flex flex-col justify-center items-center text-center px-4 overflow-hidden mb-12 border-b border-border">
-          <img src={image} alt={title} class="absolute inset-0 w-full h-full object-cover z-0" />
-          <div class="absolute inset-0 bg-black/60 z-10" />
-          <div class="absolute inset-0 bg-linear-to-t from-background to-transparent z-10" />
-          <div class="relative z-20 max-w-4xl mx-auto space-y-4">
-            <p class="text-sm md:text-base font-bold tracking-widest text-blue-400 uppercase drop-shadow-md">
-              {formattedDate} • {author}
-              {readingTime && ` • ${readingTime}`}
-            </p>
-            <h1 class="font-heading text-4xl font-extrabold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl drop-shadow-2xl">
-              {title}
-            </h1>
-          </div>
-        </div>
-      ) : (
-        <div class="px-4 py-8 sm:px-6 lg:px-8 md:py-12 relative mx-auto max-w-3xl text-center">
-          <p class="text-sm font-semibold tracking-wide text-primary uppercase">
-            {formattedDate} • {author}
-            {readingTime && ` • ${readingTime}`}
-          </p>
-          <h1 class="font-heading mt-2 text-3xl font-bold leading-tight tracking-tighter text-foreground sm:text-4xl md:text-5xl">
-            {title}
-          </h1>
-        </div>
-      )
-    }
-  </div>
-
-  <section class="relative px-4 pb-8 sm:px-6 lg:px-8 md:pb-12">
-    <div class="relative mx-auto max-w-3xl lg:max-w-5xl">
-      <div
-        class="prose prose-lg dark:prose-invert mx-auto max-w-none prose-headings:text-foreground prose-a:text-primary hover:prose-a:underline prose-p:text-muted-foreground prose-strong:text-foreground prose-li:text-muted-foreground prose-code:text-primary"
-      >
-        <Content />
+<BaseLayout {metadata}>
+  <Schema type="BlogPosting" data={{ title, description, image, pubDate, author, url }} />
+  <Schema type="BreadcrumbList" data={{ breadcrumbs: [{ name: "Home", url: siteConfig.url }, { name: "Blog", url: new URL("/blog", siteConfig.url).href }, { name: title, url }] }} />
+  <section class="frame px-6 pb-10 pt-16 max-md:px-5 max-md:pb-6 max-md:pt-10">
+    <p class="text-[12px] text-smoke"><a href="/blog" class="hover:text-ink">Blog</a>{category && <> / <a href={`/blog/category/${category}`} class="hover:text-ink">{category}</a></>}</p>
+    <h1 class="mt-6 max-w-[24ch] text-[clamp(34px,4.8vw,60px)] font-bold leading-[1.04] tracking-[-.05em]">{title}</h1>
+    <div class="mt-5">
+      <p class="max-w-[62ch] text-[18px] leading-7 text-steel max-md:text-[15px]">{description}</p>
+      <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-rule pt-5 text-[13px]">
+        <span class="font-bold text-ink">{author}</span>
+        <span class="text-smoke"><time datetime={pubDate.toISOString()}>{formattedDate}</time>{readingTime && ` · ${readingTime}`}</span>
+        <button type="button" class="ml-auto border border-rule px-3 py-1.5 text-[12px] text-steel hover:text-ink max-md:ml-0" data-copy-link={url}>Link kopieren</button>
       </div>
     </div>
   </section>
+
+  <section class="frame px-6 pb-20 max-md:px-5 max-md:pb-12">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,720px)_220px] lg:justify-between">
+      <article class="prose-runlog min-w-0"><Content /></article>
+      {
+        toc.length > 0 && (
+          <aside class="h-fit lg:sticky lg:top-20">
+            <details class="border border-rule bg-tint p-4 lg:hidden">
+              <summary class="cursor-pointer text-[12px] font-bold text-ink">Auf dieser Seite</summary>
+              <ul class="mt-3 space-y-2 text-[13px]">{toc.map((heading) => <li><a href={`#${heading.slug}`} class="text-steel hover:text-ink">{heading.text}</a></li>)}</ul>
+            </details>
+            <div class="hidden lg:block">
+              <p class="label">Auf dieser Seite</p>
+              <ul class="mt-3 space-y-3 text-[13px]">{toc.map((heading) => <li><a href={`#${heading.slug}`} class="text-steel hover:text-ink">{heading.text}</a></li>)}</ul>
+            </div>
+          </aside>
+        )
+      }
+    </div>
+  </section>
+
+  {
+    relatedPosts.length > 0 && (
+      <section class="border-t border-rule">
+        <div class="frame px-6 py-14 max-md:px-5">
+          <p class="label"><b>[01]</b> Weiter lesen</p>
+          <ul class="mt-5 border-t border-rule">
+            {relatedPosts.map((related) => <li><a href={`/blog/${related.id}`} class="group grid grid-cols-[120px_1fr_auto] items-center gap-5 border-b border-rule py-5 max-md:grid-cols-[1fr_auto]"><span class="text-[11px] uppercase tracking-[.08em] text-steel max-md:hidden">{related.data.category ?? "Allgemein"}</span><span class="font-bold text-ink group-hover:underline group-hover:underline-offset-4">{related.data.title}</span><span class="text-stone group-hover:text-ink" aria-hidden="true">-&gt;</span></a></li>)}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
+
+<script>
+  document.querySelector<HTMLButtonElement>("[data-copy-link]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    try {
+      await navigator.clipboard.writeText(button.dataset.copyLink ?? location.href);
+      button.textContent = "Kopiert";
+    } catch {
+      button.textContent = "Link markieren";
+    }
+  });
+</script>

@@ -1,54 +1,108 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
-import Headline from "../../components/ui/Headline.astro";
-import Pagination from "../../components/ui/Pagination.astro";
-import PostItem from "../../components/blog/PostItem.astro";
+import { getCollection, render } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
+import PostItem from "../../components/blog/PostItem.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const blogEntries = await getCollection("blog");
-  const sortedPosts = blogEntries
-    .filter((post) => post.data && post.data.pubDate)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-  return paginate(sortedPosts, { pageSize: 20 });
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+  return paginate(posts, { pageSize: 20 });
 }
 
 const { page } = Astro.props;
-const blog = page.data;
-
+const posts = page.data;
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const featured = allPosts[0];
+const { remarkPluginFrontmatter } = featured ? await render(featured) : { remarkPluginFrontmatter: undefined };
+const categories = ["alle", ...new Set(allPosts.map((post) => post.data.category ?? "allgemein"))];
+const featuredReadingTime = remarkPluginFrontmatter?.minutesRead ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} min` : "";
 const metadata = {
   title: "Blog",
-  description: "Neueste Nachrichten und Updates von unserem Team.",
+  description: "Praxis-Akten zu BIM, Infrastruktur, Linux, Open Source und Entwicklung.",
 };
 ---
 
-<BaseLayout metadata={metadata}>
-  <section class="relative px-4 py-8 sm:px-6 lg:px-8 md:py-12">
-    <div class="absolute inset-0 z-0">
-      <div
-        class="absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-pink-500/5"
-      >
+<BaseLayout {metadata}>
+  <section class="relative overflow-hidden border-b border-rule">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="frame relative px-6 pb-10 pt-20 max-md:px-5 max-md:pb-6 max-md:pt-12">
+      <div class="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <p class="label"><b>[01]</b> Veröffentlichungen</p>
+          <h1 class="mt-5 text-[clamp(42px,5.6vw,64px)] font-bold leading-[1.02] tracking-[-.05em]">Praxis-Akten.</h1>
+          <p class="mt-5 max-w-[55ch] leading-7 text-steel">Notizen, Lösungen und Erfahrungen aus BIM, Infrastruktur, Linux und Entwicklung.</p>
+        </div>
+        <label class="flex w-[360px] max-w-full items-center gap-3 border border-ink bg-canvas px-4 py-3 text-[13px]">
+          <span class="font-bold text-ink" aria-hidden="true">/</span>
+          <input type="search" placeholder="Beiträge durchsuchen" class="min-w-0 flex-1 bg-transparent text-ink outline-none placeholder:text-smoke" data-post-search aria-label="Beiträge durchsuchen" />
+        </label>
       </div>
-    </div>
-    <div class="relative mx-auto max-w-5xl">
-      <Headline
-        tagline="Meine Veröffentlichungen"
-        title="Blog"
-        subtitle="Entdecke die neuesten Nachrichten, Tutorials und Artikel."
-        classes={{
-          container: "reveal mb-12 text-center",
-          title:
-            "font-heading mb-4 text-4xl font-bold tracking-tight text-foreground md:text-6xl",
-          subtitle: "mx-auto max-w-3xl text-xl text-muted-foreground",
-        }}
-      />
-
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {blog.map((post) => <PostItem post={post} />)}
+      <div class="mt-8 flex gap-2 overflow-x-auto" role="group" aria-label="Beiträge nach Kategorie filtern">
+        {categories.map((category, index) => <button type="button" class="shrink-0 border border-rule px-3 py-1.5 text-[12px] capitalize text-steel aria-pressed:bg-ink aria-pressed:text-canvas" data-category={category} aria-pressed={index === 0 ? "true" : "false"}>{category}</button>)}
       </div>
-      <Pagination page={page} />
     </div>
   </section>
+
+  {
+    featured && (
+      <section class="frame px-6 py-10 max-md:px-5">
+        <a href={`/blog/${featured.id}`} class="group grid items-center gap-10 lg:grid-cols-[1.1fr_.9fr]" data-post={featured.data.category ?? "allgemein"} data-title={featured.data.title.toLowerCase()}>
+          {
+            featured.data.image && (
+              <img src={featured.data.image} alt="" class="aspect-[16/9] w-full border border-rule object-cover" />
+            )
+          }
+          <div>
+            <p class="label"><b>[02]</b> Neuester Beitrag</p>
+            <p class="mt-5 text-[11px] uppercase tracking-[.08em] text-steel">{featured.data.category ?? "Allgemein"}</p>
+            <h2 class="mt-3 text-[clamp(28px,3.8vw,46px)] font-bold leading-[1.08] tracking-[-.04em] group-hover:underline group-hover:underline-offset-6">{featured.data.title}</h2>
+            <p class="mt-5 max-w-[55ch] leading-7 text-steel">{featured.data.description}</p>
+            <p class="mt-5 text-[12px] text-smoke">{featured.data.author} · {featured.data.pubDate.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" })}{featuredReadingTime && ` · ${featuredReadingTime}`}</p>
+          </div>
+        </a>
+      </section>
+    )
+  }
+
+  <section class="frame px-6 py-14 max-md:px-5">
+    <div class="flex items-end"><p class="label"><b>[03]</b> Alle Beiträge</p><span class="ml-auto text-[12px] text-smoke">{allPosts.length} Beiträge</span></div>
+    <div class="mt-6 grid border border-rule md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post, index) => <div class:list={["border-rule", index > 0 && "border-t md:border-t-0 md:border-l", index >= 3 && "lg:border-t"]}><PostItem {post} /></div>)}
+    </div>
+    {
+      page.lastPage > 1 && (
+        <nav class="mt-8 flex justify-between text-[13px]" aria-label="Seitennavigation">
+          {page.url.prev ? <a class="text-link hover:underline" href={page.url.prev}>← Neuere Beiträge</a> : <span />}
+          {page.url.next && <a class="text-link hover:underline" href={page.url.next}>Ältere Beiträge →</a>}
+        </nav>
+      )
+    }
+  </section>
 </BaseLayout>
+
+<script>
+  let category = "alle";
+  let query = "";
+  const applyFilters = () => {
+    document.querySelectorAll<HTMLElement>("[data-post]").forEach((post) => {
+      const matchesCategory = category === "alle" || post.dataset.post === category;
+      const matchesQuery = !query || post.dataset.title?.includes(query);
+      post.hidden = !matchesCategory || !matchesQuery;
+    });
+  };
+  document.querySelectorAll<HTMLButtonElement>("[data-category]").forEach((button) => {
+    button.addEventListener("click", () => {
+      category = button.dataset.category ?? "alle";
+      document.querySelectorAll("[data-category]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      applyFilters();
+    });
+  });
+  document.querySelector<HTMLInputElement>("[data-post-search]")?.addEventListener("input", (event) => {
+    query = (event.target as HTMLInputElement).value.toLowerCase().trim();
+    applyFilters();
+  });
+</script>
