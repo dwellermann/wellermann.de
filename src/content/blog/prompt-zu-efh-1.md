@@ -1,10 +1,9 @@
 ---
 title: 'Vom Prompt zum 3D-BIM-Modell: Wie ich mich beim EFH plötzlich wie ein Vibe Coder fühlte'
-description: 'Über 20 Jahre am Bau, aber rudimentäre CAD-Kenntnisse: Ein Praxis-Test mit BIMCraft, Goose, MCP und den wahren Kosten von Gemini 4 Hydrogen und Mistral.'
+description: 'Über 20 Jahre am Bau, aber rudimentäre CAD-Kenntnisse: Ein Praxis-Test mit BIMCraft, Goose, MCP und den wahren Kosten von Gemini 4 Hydrogen und Mistral Large.'
 pubDate: 2026-11-21
-image: "/blog/bimcraft-efh-hero.png"
+image: "/blogs/bimcraft-efh-hero.png"
 tags: ['BIM', 'Open Source', 'KI', 'MCP', 'Goose', 'BIMCraft', 'CachyOS']
-author: "Daniel Wellermann"
 ---
 
 ## Kurzfassung
@@ -13,7 +12,6 @@ Ich bin schon so lange im Baugeschäft (über 20 Jahre), habe aber nur rudiment�
 
 Als ich gesehen habe, wie zuletzt selbst komplexe Kreativ-Tools wie die Adobe-Suite-Welt mit Rust und KI neu gedacht wurden, musste es doch auch etwas Vergleichbares für die Bauwirtschaft geben: Da bin ich über **BIMCraft** gestolpert. Und wenn **MCP (Model Context Protocol)** ohnehin am Start ist – wofür sich mühsam in die Tool-Bedienung einarbeiten, wenn die KI das Modellieren übernehmen kann? :-P
 
-In diesem Beitrag zeige ich, wie weit ich mit **BIMCraft + Goose** bei einem kompletten Einfamilienhaus gekommen bin, was der Spaß wirklich gekostet hat und warum ich mich dabei zum ersten Mal wie ein echter „Vibe Coder“ gefühlt habe.
 
 ## Problemstellung
 
@@ -50,9 +48,9 @@ Erst als ich dem Prompt **klare Zonen-Koordinaten** (Nordzone für Eingang, Trep
 
 ## Modellvergleich & echte Kosten
 
-Den verbesserten Prompt habe ich jeweils gegen **Mistral (`medium-latest`)** und **Google Gemini (`gemini-4-hydrogen`)** getestet:
+Den verbesserten Prompt habe ich am Ende gegen **Mistral Large** und **Google Gemini (`gemini-4-hydrogen`)** getestet:
 
-- **Qualität:** Bei exakt gleichem Prompt lieferte **`Gemini 4 Hydrogen`** das deutlich bessere Ergebnis. Die Raumproportionen passten besser, und der Klinker zog sich sauber bis in die Giebelspitzen hoch. *(Mistral hatte zudem noch leichte Reibung, weil Goose das ganz neue Large-4-Modell samt Thinking-Steuerung noch nicht nativ kannte.)*
+- **Qualität:** Bei exakt gleichem Prompt lieferte **`Gemini 4 Hydrogen`** das deutlich bessere Ergebnis. Die Raumproportionen passten besser, und der Klinker zog sich sauber bis in die Giebelspitzen hoch. *(Bei Mistral Large klemmte zusätzlich noch, dass Goose das ganz neue Large-4-Modell samt Thinking-Steuerung noch nicht nativ kannte.)*
 - **Die echten Kosten:** Im Netz liest man oft, solche KI-Workflows würden nur „ein paar Cent“ kosten. Bei kurzen Textfragen stimmt das – **nicht aber bei komplexen MCP-Agenten**. Durch die vielen Runden, Denk-Tokens und den mitwachsenden Projektkontext kostete **ein einzelner, sauberer Durchlauf mit `Gemini 4 Hydrogen` etwa 1,50 bis 2,00 €**. Alle Tests und Fehlversuche zusammen lagen am Ende bei rund **5 €**.
 
 | Punkt | Praxisergebnis |
@@ -62,7 +60,7 @@ Den verbesserten Prompt habe ich jeweils gegen **Mistral (`medium-latest`)** und
 | **Gesamtkosten der Tests** | ca. **5,00 €** |
 | **Wichtigstes Learning** | Feste Zonen-Koordinaten schlagen vage Wünsche |
 
-## Mein Fazit
+## Mein Fazit – und Ausblick auf Part 2
 
 **Zum ersten Mal habe ich mich wie ein echter Vibe Coder gefühlt.**
 
@@ -70,4 +68,10 @@ Ja, ich verstehe sehr viel vom Bau – aber was weiß ich im Detail, wie groß e
 
 Beim KI-unterstützten Programmieren kenne ich jedes Detail: Frameworks, Algorithmen, Architektur. Da habe ich jederzeit die volle Kontrolle und merke sofort, wenn die KI Unsinn schreibt. Aber genau hier – in einem Bereich, in dem ich eigentlich über 20 Jahre Erfahrung mitbringe – stand ich bei der Entwurfsplanung plötzlich selbst da und wusste es gar nicht so genau.
 
-Als Selbstzweck taugt das Ganze also nicht. Aber um in BIMCraft schnell ein **sauberes Rohbau-Gerüst vorzurüsten**, Varianten zu testen und die Klickarbeit für Ebenen und Wandaufbauten abzukürzen, ist **BIMCraft + Goose** ein verdammt spannender Werkzeugkasten – solange am Ende wieder der Mensch draufschaut.
+Trotzdem steht für mich fest: **Gerade das reine Aufsetzen eines Projekts über KI und MCP kann enorm viel Fleißarbeit abnehmen.** Ebenen, Wandaufbauten, Grundgerüst – das steht in wenigen Minuten, und man kann direkt per Hand oder mit `Strg+Z` eingreifen.
+
+Damit bleiben für mich direkt zwei spannende Fragen offen, denen ich als Nächstes nachgehen will:
+1. **Wie weit kommt man mit vorgefertigten Assistenten und wiederverwendbaren Bauteil-Familien**, damit die KI nicht bei jedem Projekt bei null anfängt?
+2. **Kriege ich die DIN 276 direkt an das Modell dran** – also eine automatisierte Kostengliederung bis in die Kostengruppen direkt aus den BIMCraft-Bauteilen und Mengen?
+
+Genau das wird sich in **Part 2** zeigen!
