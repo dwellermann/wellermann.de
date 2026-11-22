@@ -1,9 +1,10 @@
 ---
-title: 'Vom Prompt zum 3D-BIM-Modell: Wie ich mich beim EFH plötzlich wie ein Vibe Coder fühlte'
+title: 'Vom Prompt zu Bauzeichnung(3D)'
 description: 'Über 20 Jahre am Bau, aber rudimentäre CAD-Kenntnisse: Ein Praxis-Test mit BIMCraft, Goose, MCP und den wahren Kosten von Gemini 4 Hydrogen und Mistral Large.'
 pubDate: 2026-11-21
 image: "/blogs/bimcraft-efh-hero.png"
 tags: ['BIM', 'Open Source', 'KI', 'MCP', 'Goose', 'BIMCraft', 'CachyOS']
+author: "Daniel Wellermann"
 ---
 
 ## Kurzfassung
@@ -67,6 +68,8 @@ Den verbesserten Prompt habe ich am Ende gegen **Mistral Large** und **Google Ge
 Ja, ich verstehe sehr viel vom Bau – aber was weiß ich im Detail, wie groß ein Fenster wirklich passend dimensioniert sein muss? Wann eine Treppe als gerader Lauf sinnvoller ist als eine U-Treppe? Oder welche Mindestmaße ein Gäste-WC braucht, damit man sich darin noch umdrehen kann?
 
 Beim KI-unterstützten Programmieren kenne ich jedes Detail: Frameworks, Algorithmen, Architektur. Da habe ich jederzeit die volle Kontrolle und merke sofort, wenn die KI Unsinn schreibt. Aber genau hier – in einem Bereich, in dem ich eigentlich über 20 Jahre Erfahrung mitbringe – stand ich bei der Entwurfsplanung plötzlich selbst da und wusste es gar nicht so genau.
+
+**Aus meiner Sicht gilt deshalb genau dasselbe wie in der Softwareentwicklung: Genausowenig wie gute Programmierer oder Softwareentwickler durch KI ersetzt werden, werden gute Bauzeichner oder Architekten ersetzt.** Echte Kreativität beim Lösen von Problemen ist **NOCH** ein klarer Vorteil des Menschen *(Behaltet trotzdem Matrix und I, Robot im Hinterkopf ;-) )*.
 
 Trotzdem steht für mich fest: **Gerade das reine Aufsetzen eines Projekts über KI und MCP kann enorm viel Fleißarbeit abnehmen.** Ebenen, Wandaufbauten, Grundgerüst – das steht in wenigen Minuten, und man kann direkt per Hand oder mit `Strg+Z` eingreifen.
 
